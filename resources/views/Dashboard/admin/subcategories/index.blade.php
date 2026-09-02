@@ -1,0 +1,452 @@
+@extends("Layout.layouttwo")
+@section("AdminContent")
+
+<style>
+  :root{
+    --mint:#bae0db;
+    --teal:#7a958f;
+    --teal-dark:#6a857f;
+    --bg:#f6fbfa;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#64748b;
+    --border:#e5e7eb;
+    --shadow: 0 12px 30px rgba(15, 23, 42, .08);
+  }
+
+  .container-fluid{ padding-left:0; padding-right:0; }
+
+  .page-wrap{
+    margin: 18px 10px 26px;
+    padding: 14px;
+    background: var(--bg);
+    border-radius: 18px;
+  }
+
+  .page-head{
+    background: linear-gradient(135deg, rgba(186,224,219,.55), rgba(122,149,143,.25));
+    border: 1px solid rgba(122,149,143,.25);
+    border-radius: 18px;
+    padding: 16px 16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap: 14px;
+    box-shadow: 0 10px 22px rgba(122,149,143,.16);
+  }
+
+  .page-head h1{
+    margin:0;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing:.2px;
+  }
+
+  .page-head p{
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: rgba(15,23,42,.70);
+  }
+
+  .head-right{
+    display:flex;
+    gap: 10px;
+    align-items:center;
+    flex-wrap: wrap;
+    justify-content:flex-end;
+  }
+
+  .searchbox{
+    position: relative;
+    min-width: 280px;
+    width: 34vw;
+    max-width: 380px;
+  }
+  .searchbox i{
+    position:absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 16px;
+    color: rgba(15,23,42,.45);
+    font-size: 14px;
+  }
+  .search-input{
+    width:100%;
+    padding: 11px 16px 11px 42px;
+    border: 1px solid rgba(122,149,143,.35);
+    border-radius: 999px;
+    outline:none;
+    font-size: 14px;
+    background: rgba(255,255,255,.95);
+    transition: .2s;
+    box-shadow: 0 8px 18px rgba(122,149,143,.12);
+  }
+  .search-input:focus{
+    border-color: rgba(122,149,143,.70);
+    box-shadow: 0 14px 26px rgba(122,149,143,.20);
+  }
+
+  .add-new-btn{
+    background: var(--teal);
+    color: #fff;
+    border:none;
+    padding: 11px 16px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 14px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    transition: .2s;
+    box-shadow: 0 12px 22px rgba(122,149,143,.22);
+    white-space: nowrap;
+  }
+  .add-new-btn:hover{
+    background: var(--teal-dark);
+    color:#fff;
+    transform: translateY(-1px);
+  }
+
+  .card-shell{
+    margin-top: 14px;
+    background: var(--card);
+    border: 1px solid rgba(122,149,143,.22);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    overflow:hidden;
+  }
+
+  .card-top{
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(122,149,143,.18);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap: 10px;
+    background: linear-gradient(180deg, rgba(186,224,219,.35), rgba(255,255,255,1));
+  }
+
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    background: rgba(186,224,219,.55);
+    color: rgba(15,23,42,.78);
+    border: 1px solid rgba(122,149,143,.22);
+  }
+
+  .table-wrapper{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .table-wrapper::-webkit-scrollbar{ height: 8px; }
+  .table-wrapper::-webkit-scrollbar-thumb{ background: rgba(122,149,143,.35); border-radius: 999px; }
+  .table-wrapper::-webkit-scrollbar-track{ background: rgba(186,224,219,.25); border-radius: 999px; }
+
+  #subcatTable{
+    width:100%;
+    margin:0;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  #subcatTable thead th{
+    padding: 14px 12px;
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--text);
+    white-space: nowrap;
+    background: rgba(186,224,219,.40);
+    border-bottom: 1px solid rgba(122,149,143,.18);
+  }
+
+  #subcatTable tbody td{
+    padding: 14px 12px;
+    font-size: 14px;
+    white-space: nowrap;
+    color: var(--text);
+    border-bottom: 1px solid rgba(122,149,143,.14);
+    vertical-align: middle;
+  }
+
+  #subcatTable tbody tr{
+    background:#fff;
+    transition: .15s;
+  }
+  #subcatTable tbody tr:hover{
+    background: rgba(186,224,219,.22);
+  }
+
+  .badge-soft{
+    display:inline-flex;
+    align-items:center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    background: rgba(186,224,219,.55);
+    color: rgba(15,23,42,.75);
+    border: 1px solid rgba(122,149,143,.20);
+  }
+
+  .status-badge{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 900;
+    border: 1px solid rgba(122,149,143,.22);
+    color: rgba(15,23,42,.75);
+    background: rgba(186,224,219,.30);
+  }
+  .status-dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--teal);
+    display:inline-block;
+  }
+  .status-inactive .status-dot{
+    background: rgba(15,23,42,.35);
+  }
+
+  .actions{
+    display:flex;
+    justify-content:center;
+    gap: 10px;
+  }
+
+  .icon-btn{
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+    border: 1px solid rgba(122,149,143,.25);
+    background: rgba(255,255,255,.95);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    transition: .18s;
+    box-shadow: 0 10px 18px rgba(122,149,143,.12);
+  }
+  .icon-btn i{
+    color: var(--teal);
+    font-size: 14px;
+  }
+  .icon-btn:hover{
+    transform: translateY(-1px);
+    border-color: rgba(122,149,143,.55);
+    box-shadow: 0 16px 28px rgba(122,149,143,.18);
+  }
+  .icon-btn.danger i{
+    color: #b91c1c;
+  }
+  .icon-btn.danger:hover{
+    border-color: rgba(185,28,28,.35);
+    box-shadow: 0 16px 28px rgba(185,28,28,.12);
+  }
+
+  .empty-state{
+    padding: 26px 14px;
+    text-align:center;
+    color: rgba(15,23,42,.65);
+  }
+  .empty-state .title{
+    font-weight: 900;
+    color: var(--text);
+    margin-top: 6px;
+  }
+
+.table-wrapper{
+  overflow-x: auto;
+  padding-bottom: 22px;   /* scrollbar aur pagination ke beech gap */
+}
+
+.pagination-wrap{
+  padding: 16px 14px 18px;
+  margin-top: 10px;       /* pagination ko table se neeche lao */
+  border-top: 1px solid rgba(122,149,143,.18);
+  background: rgba(186,224,219,.12);
+}
+
+
+  /* Pagination clean and prevent huge arrows */
+  .pagination{ margin:0;   gap: 8px;                 /* main gap */
+}
+  .pagination .page-link{
+    border-radius: 12px !important;
+    padding: 8px 12px !important;
+    color: var(--teal) !important;
+    border-color: rgba(122,149,143,.22) !important;
+  }
+  .pagination .page-link:hover{
+    background: rgba(186,224,219,.30) !important;
+  }
+  .pagination .page-item.active .page-link{
+    background: var(--teal) !important;
+    border-color: var(--teal) !important;
+    color: #fff !important;
+  }
+  .pagination svg{
+    width: 16px !important;
+    height: 16px !important;
+    max-width: 16px !important;
+    max-height: 16px !important;
+  }
+
+  @media (max-width: 768px){
+    .page-head{ flex-direction: column; align-items: stretch; }
+    .head-right{ justify-content: stretch; }
+    .searchbox{ width: 100%; min-width: unset; max-width: unset; }
+    .add-new-btn{ width:100%; justify-content:center; }
+    .pagination-wrap{ justify-content:center; }
+  }
+</style>
+
+<div class="container-fluid mt-3">
+  <div class="page-wrap">
+
+    <div class="page-head">
+      <div>
+        <h1>Subcategories</h1>
+        <p>Manage subcategories, ordering, status and actions.</p>
+      </div>
+
+      <div class="head-right">
+        <div class="searchbox">
+          <i class="fas fa-search"></i>
+          <input type="text" class="search-input" placeholder="Search subcategory, slug, category..." id="subcatSearch">
+        </div>
+
+        <a href="{{ route('Dashboard.admin.subcategories.add') }}" class="add-new-btn">
+          <i class="fas fa-plus"></i>
+          Add New
+        </a>
+      </div>
+    </div>
+
+    @if(session('success'))
+      <div class="alert alert-success mt-3 mb-0" style="border-radius:14px;">
+        {{ session('success') }}
+      </div>
+    @endif
+
+    <div class="card-shell">
+      <div class="card-top">
+        <span class="pill">
+          <i class="fas fa-layer-group"></i>
+          Total: {{ $subcategories->total() }}
+        </span>
+        <span style="font-size:13px; color:rgba(15,23,42,.65); font-weight:700;">
+          Showing {{ $subcategories->firstItem() ?? 0 }} to {{ $subcategories->lastItem() ?? 0 }}
+        </span>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="table" id="subcatTable">
+        <thead>
+  <tr>
+    <th>Subcategory</th>
+    <th>Category</th>
+    <th>Status</th>
+    <th class="text-center" style="width:140px;">Actions</th>
+  </tr>
+</thead>
+
+
+        <tbody>
+  @forelse ($subcategories as $sub)
+    <tr>
+      <!-- Subcategory Name -->
+      <td style="font-weight:800;">
+        {{ $sub->name }}
+        <div style="font-size:12px; color:#64748b;">
+          {{ $sub->slug }}
+        </div>
+      </td>
+
+      <!-- Category -->
+      <td>
+        <span class="badge-soft">
+          {{ $sub->category->name ?? 'No Category' }}
+        </span>
+      </td>
+
+      <!-- Status -->
+      <td>
+        @if($sub->is_active)
+          <span class="status-badge">
+            <span class="status-dot"></span> Active
+          </span>
+        @else
+          <span class="status-badge status-inactive">
+            <span class="status-dot"></span> Inactive
+          </span>
+        @endif
+      </td>
+
+      <!-- Actions -->
+      <td class="text-center">
+        <div class="actions">
+          <a class="icon-btn" href="{{ route('Dashboard.admin.subcategories.edit', $sub->id) }}">
+            <i class="fas fa-pen"></i>
+          </a>
+
+          <form action="{{ route('Dashboard.admin.subcategories.delete', $sub->id) }}" method="POST"
+                onsubmit="return confirm('Are you sure?')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="icon-btn danger">
+              <i class="fas fa-trash"></i>
+            </button>
+          </form>
+        </div>
+      </td>
+    </tr>
+  @empty
+    <tr>
+      <td colspan="4">
+        <div class="empty-state">
+          <div class="title">No subcategories found</div>
+        </div>
+      </td>
+    </tr>
+  @endforelse
+</tbody>
+
+        </table>
+      </div>
+
+      <div class="pagination-wrap">
+        {{ $subcategories->links('pagination::bootstrap-5') }}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const searchInput = document.getElementById('subcatSearch');
+  const table = document.getElementById('subcatTable');
+
+  if(searchInput && table){
+    searchInput.addEventListener('keyup', function(){
+      const q = this.value.toLowerCase().trim();
+      const rows = table.querySelectorAll('tbody tr');
+
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+  }
+</script>
+
+@endsection

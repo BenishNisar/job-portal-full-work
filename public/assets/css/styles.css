@@ -1,0 +1,3104 @@
+/* ============ JOB PORTAL PROFESSIONAL THEME ============ */
+
+/* --- Variables --- */
+/* ============ SPARROW SHARP THEME VARIABLES ============ */
+:root {
+    --sparrow-dark: #3c4a4f; /* Charcoal from logo wings */
+    --sparrow-green: #638d3f; /* Leaf Green from logo text & bird */
+    --sparrow-light: #f4f6f7; /* Soft clean background */
+    --sparrow-muted: #64748b; /* Professional muted gray */
+
+    /* Worldwide Standard Job Portal Font Family */
+    --font-global:
+        "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Global Body Apply */
+body {
+    font-family: var(--font-global) !important;
+    background-color: var(--sparrow-light) !important;
+    color: var(--sparrow-dark) !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Ensure all headings and texts inherit worldwide professional font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+button,
+input,
+select,
+textarea {
+    font-family: var(--font-global);
+}
+
+.text-pink {
+    color: var(--sparrow-green) !important;
+}
+/* --- Navbar Styling --- */
+.navbar {
+    background-color: #ffffff !important;
+    padding: 12px 0;
+    transition: all 0.3s ease;
+    z-index: 1030;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--sparrow-dark);
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--sparrow-dark) !important;
+    font-size: 0.95rem;
+    margin: 0 10px;
+    transition: color 0.2s;
+}
+.nav-link:hover,
+.nav-link.active {
+    color: var(--sparrow-green) !important;
+}
+
+/* --- Profile Avatar (New Section) --- */
+.user-avatar-btn {
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.user-avatar-btn:hover {
+    transform: scale(1.05);
+}
+
+.avatar-circle {
+    width: 42px;
+    height: 42px;
+    background-color: var(--primary-pink);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: var(--font-heading);
+    border: 2px solid #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Dropdown Menu */
+.dropdown-menu {
+    min-width: 220px;
+    animation: slideDown 0.2s ease;
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f4ed !important; /* Soft green-tinted background */
+    color: var(--sparrow-green) !important;
+}
+
+.dropdown-item i {
+    width: 20px;
+    text-align: center;
+}
+
+/* --- Buttons --- */
+.btn-custom {
+    background-color: var(--sparrow-green) !important;
+    border: 2px solid var(--sparrow-green) !important;
+    color: white !important;
+    font-weight: 600;
+    padding: 8px 24px;
+    transition: all 0.2s ease;
+}
+
+.btn-custom:hover {
+    background-color: #557935 !important;
+    border-color: #557935 !important;
+    color: white !important;
+}
+
+/* --- Mobile Toggler Visibility Fix --- */
+.navbar-toggler {
+    border: none !important;
+    outline: none !important;
+    padding: 5px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.hamburger-box {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    /* Optional: Light grey background if you want it to stand out more */
+    /* background-color: #f8f9fa; */
+}
+
+.hamburger-box i {
+    color: #1a1a2e !important; /* Forces the icon to be Dark Blue/Black */
+}
+
+/* --- Mobile Sidebar Links --- */
+.offcanvas .nav-link.active {
+    color: var(--sparrow-green) !important;
+}
+
+.offcanvas .nav-link {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.offcanvas .nav-link:hover {
+    color: var(--sparrow-green) !important;
+}
+
+/* Ensure Search Bar stacks nicely on mobile */
+@media (max-width: 991px) {
+    .bws-search-wrapper {
+        margin: 0 15px; /* Add margin on sides for mobile */
+    }
+    .btn-custom {
+        background-color: var(--primary-pink);
+        border: 2px solid var(--primary-pink);
+        color: white;
+        font-weight: 600;
+        padding: 8px 24px;
+        margin-bottom: 20px;
+    }
+}
+
+/* Dropdown */
+/* ============ 2026 ADVANCE 3-COLUMN MEGA MENU & FIX ============ */
+/* ============ 2026 EXECUTIVE MEGA MENU FINAL ============ */
+
+@media (min-width: 992px) {
+    .dropdown-mega {
+        position: relative;
+    }
+
+    /* FIX: Hide default Bootstrap arrow */
+    .dropdown-toggle::after {
+        display: none !important;
+    }
+
+    /* Invisible Bridge for Stability */
+    .dropdown-mega::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 25px;
+        display: block;
+        z-index: 1;
+    }
+
+    .dropdown-mega:hover .mega-menu-custom {
+        display: block !important;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Mega Menu Design - Clean & Static */
+    .mega-menu-custom {
+        display: none;
+        min-width: 850px !important;
+        background: #ffffff !important; /* Professional Solid White */
+        border-radius: 20px !important;
+        top: calc(100% + 15px) !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        padding: 0 !important;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1) !important;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.06) !important;
+        z-index: 1000;
+    }
+}
+
+/* --- Grid Layout --- */
+.mega-menu-body {
+    display: flex;
+    flex-wrap: wrap;
+    background: #fff;
+}
+.menu-col {
+    padding: 35px 30px;
+    flex: 1;
+}
+.border-end-light {
+    border-right: 1px solid #f0f0f0;
+}
+
+.menu-heading {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px;
+    display: block;
+}
+
+/* --- Clean Item Styling (No BG Hover) --- */
+.mega-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0 !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none;
+    background: transparent !important;
+}
+
+.mega-item:hover {
+    transform: translateX(8px); /* Subtle slide for feedback */
+}
+
+.mega-item:hover b {
+    color: var(--sparrow-green) !important;
+}
+.icon-circle-sm {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa; /* Neutral light grey */
+    color: #555;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.mega-item:hover .icon-circle-sm {
+    background: var(--sparrow-green) !important;
+    color: #fff !important;
+}
+.item-text {
+    margin-left: 18px;
+    line-height: 1.3;
+}
+.item-text b {
+    display: block;
+    color: var(--dark-blue);
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+.item-text small {
+    color: #bbb;
+    font-size: 0.75rem;
+    display: block;
+}
+
+/* --- Mobile Fixes --- */
+.toggle-icon-mobile {
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+}
+[aria-expanded="true"] .toggle-icon-mobile {
+    transform: rotate(180deg);
+    color: var(--sparrow-green);
+}
+#mobileSectorsCollapse {
+    background: #fff;
+    border-top: 1px solid #eee;
+}
+.mobile-mega-content .icon-circle-sm {
+    background: #f8f9fa;
+    color: #444;
+}
+/* footer design in job portal website */
+
+@media (min-width: 992px) {
+    .dropdown-mega:hover .mega-menu-custom {
+        display: block !important;
+        opacity: 1;
+        visibility: visible;
+        margin-top: 0;
+    }
+
+    #sectorsDropdown {
+        cursor: pointer;
+    }
+}
+
+/* ============ FOOTER SECTION ============ */
+.footer-section {
+    background: #151414; /* Deep Premium Dark */
+    position: relative;
+    font-family: var(--font-body);
+    margin-top: 50px;
+}
+
+/* CTA Section */
+.footer-cta {
+    border-bottom: 1px solid #373636;
+}
+
+.cta-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+}
+
+/* Footer Widgets */
+.footer-widget-heading h3 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    position: relative;
+    font-family: var(--font-heading);
+}
+
+.footer-widget-heading h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    height: 3px;
+    width: 40px;
+    background: var(--primary-pink);
+    border-radius: 5px;
+}
+
+.footer-text p {
+    margin-bottom: 14px;
+    font-size: 15px;
+    color: #a0a0a0;
+    line-height: 26px;
+}
+
+/* Social Icons */
+/* ==========================================================
+   SPARROW SHARP - NEW ULTRA-MODERN BLACK FOOTER CSS
+   ========================================================== */
+.sparrow-footer {
+    background-color: #080808; /* Deep Rich Black */
+    border-top: 1px solid #1c1c1c;
+    font-family: var(--font-body);
+}
+
+/* Subtle Glow Background */
+.footer-glow-shape {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 200px;
+    background: radial-gradient(
+        circle,
+        rgba(99, 141, 63, 0.08) 0%,
+        rgba(0, 0, 0, 0) 70%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Top Newsletter Box */
+.footer-top-row {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.footer-subscribe-box input:focus {
+    box-shadow: none !important;
+    border-color: var(--sparrow-green) !important;
+}
+
+/* Social Icon Pills */
+.social-icon-pill {
+    width: 40px;
+    height: 40px;
+    background-color: #161616;
+    border: 1px solid #262626;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.social-icon-pill:hover {
+    background-color: var(--sparrow-green);
+    border-color: var(--sparrow-green);
+    transform: translateY(-3px);
+    color: #ffffff;
+}
+
+/* Nav Links Styling */
+.footer-nav-link {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
+}
+
+.footer-nav-link:hover {
+    color: #ffffff;
+    padding-left: 4px;
+}
+
+/* App Store Buttons */
+/* App Store & Google Play Buttons Styling */
+.app-store-btn {
+    background-color: #121212 !important;
+    transition: all 0.25s ease;
+}
+
+.app-store-btn:hover {
+    border-color: var(--sparrow-green) !important;
+    background-color: #1a1a1a !important;
+    transform: translateY(-2px);
+}
+/* Bottom Links */
+.footer-bottom-link {
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-bottom-link:hover {
+    color: #ffffff !important;
+}
+
+/*header section second  */
+/* ============ HERO SECTION (SEEK STYLE) ============ */
+/* ============ HERO SECTION (SEEK STYLE UPDATED) ============ */
+/* ============ JOB CARDS STYLING ============ */
+.job-card-item {
+    /* background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.8); */
+    border-radius: 16px;
+    padding: 24px;
+    /* transition: all 0.3s ease; */
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); */
+}
+
+/* .job-card-item:hover {
+    border-color: var(--sparrow-green);
+    box-shadow: 0 10px 30px rgba(60, 74, 79, 0.06);
+    transform: translateY(-2px);
+} */
+
+/* Job Title styling */
+.job-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--sparrow-dark);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+/* .job-card-title:hover {
+    color: var(--sparrow-green);
+} */
+
+/* Badge styling (Full-time / Location) */
+.badge-custom-sparrow {
+    background-color: var(--sparrow-light);
+    color: var(--sparrow-dark);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+/* View details link (View-only mode) */
+.view-details-link {
+    color: var(--sparrow-green);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.view-details-link:hover {
+    color: var(--sparrow-dark);
+    text-decoration: underline;
+}
+
+/* herosection */
+
+/* ============ NAYA MODERN HERO DESIGN ============ */
+/* ============ HERO SECTION WITH BACKGROUND IMAGE & RESPONSIVE ============ */
+.hero-modern-section {
+    position: relative;
+    /* Temporary high-quality office background image */
+    background: url("https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop")
+        no-repeat center center/cover;
+    padding: 120px 0 140px 0;
+    margin-top: 76px;
+}
+
+/* Dark professional overlay so white text & search box pop out clearly */
+.hero-modern-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(60, 74, 79, 0.88) 0%,
+        rgba(30, 41, 59, 0.92) 100%
+    );
+    z-index: 1;
+}
+
+/* Badge styling */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--sparrow-dark);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.badge-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--sparrow-green);
+    border-radius: 50%;
+}
+
+/* Title Styling */
+.hero-main-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -1.5px;
+    line-height: 1.15;
+}
+
+.hero-main-subtitle {
+    font-size: 1.15rem;
+    color: #cbd5e1;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Modern Floating Search Bar Layout */
+.modern-search-bar {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25) !important;
+}
+
+@media (min-width: 768px) {
+    .modern-search-bar {
+        flex-direction: row;
+        align-items: center;
+        padding: 8px 8px 8px 20px;
+        border-radius: 50px; /* Pill shape on tablet & desktop */
+    }
+}
+
+.search-input-group {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    padding: 8px 0;
+}
+
+.search-input-group i {
+    color: var(--sparrow-green);
+    font-size: 1.1rem;
+    margin-right: 12px;
+}
+
+.search-input-group input {
+    font-size: 1rem;
+    color: var(--sparrow-dark);
+    width: 100%;
+}
+
+.search-input-group input::placeholder {
+    color: #94a3b8;
+}
+
+.search-divider {
+    width: 1px;
+    height: 30px;
+    background-color: #e2e8f0;
+    margin: 0 15px;
+}
+
+/* Modern Button */
+.btn-modern-submit {
+    background-color: var(--sparrow-green);
+    color: #fff;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 12px;
+    border: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    .btn-modern-submit {
+        border-radius: 40px;
+    }
+}
+
+.btn-modern-submit:hover {
+    background-color: #557935;
+    color: #fff;
+}
+
+.text-brand-green {
+    color: #83b35a !important; /* Slightly brighter green for dark background contrast */
+}
+
+/* ============ MOBILE & TABLET RESPONSIVE FIXES ============ */
+@media (max-width: 991px) {
+    .hero-modern-section {
+        padding: 80px 0 100px 0;
+    }
+    .hero-main-title {
+        font-size: 2.5rem; /* Scales down nicely on tablets */
+    }
+    .hero-main-subtitle {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-main-title {
+        font-size: 2rem; /* Perfect for mobile screens */
+    }
+    .modern-search-bar {
+        padding: 12px;
+        border-radius: 16px; /* Stacked inputs on small mobile screens */
+    }
+}
+/* ==========================================================
+   NEW ABOUT SECTION STYLING (SPARROW SHARP)
+   ========================================================== */
+.about-modern-section {
+    background-color: #ffffff;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    position: relative;
+}
+
+/* Image Wrapper Layout */
+.about-image-wrapper {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.main-img-box {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(60, 74, 79, 0.08);
+}
+
+/* Floating Badge Card on Image */
+.floating-badge-card {
+    position: absolute;
+    bottom: -10px;
+    right: 20px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    max-width: 250px;
+}
+
+/* Responsive Padding & Mobile Alignment */
+@media (max-width: 991px) {
+    .about-modern-section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .floating-badge-card {
+        position: relative;
+        bottom: 0;
+        right: 0;
+        margin-top: 20px;
+        max-width: 100%;
+    }
+
+    .about-content-area {
+        padding-left: 0 !important;
+        text-align: center;
+    }
+
+    .about-content-area .row {
+        justify-content: center;
+    }
+}
+
+/* logo */
+/* ============ 2026 INFINITE STREAM ============ */
+/* ==========================================================
+   INFINITE STREAM / SECTORS SECTION (SPARROW SHARP)
+   ========================================================== */
+.sectors-stream {
+    background: #f8fafc; /* Clean professional grey-blue tint */
+    padding-top: 80px;
+    padding-bottom: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Glow Blob (Updated to Green Tint) */
+.stream-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 120px;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(99, 141, 63, 0.08) 0%,
+        transparent 70%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- Stream Wrapper --- */
+.stream-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 30px 0;
+    z-index: 2;
+}
+
+.stream-track {
+    display: flex;
+    width: calc(300px * 12); /* Card Width * Total Items */
+    animation: streamScroll 40s linear infinite;
+}
+
+@keyframes streamScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-300px * 6));
+    }
+}
+
+/* --- Premium Glass Card --- */
+.stream-card {
+    width: 280px;
+    flex-shrink: 0;
+    margin: 0 15px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.stream-card:hover {
+    border-color: var(--sparrow-green);
+}
+
+.stream-card:active {
+    transform: scale(0.98);
+}
+
+/* Icon Styling (Updated to Brand Green) */
+.card-icon {
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--sparrow-green);
+    box-shadow: 0 4px 10px rgba(99, 141, 63, 0.12);
+}
+
+/* Text Info */
+.card-info h5 {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0;
+    color: var(--sparrow-dark);
+}
+
+.card-info span {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* --- Gradient Text (Updated to Charcoal & Green) --- */
+.text-gradient {
+    background: linear-gradient(
+        135deg,
+        var(--sparrow-dark),
+        var(--sparrow-green)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- Fade Edges --- */
+.stream-fade-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(to right, #f8fafc, transparent);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.stream-fade-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(to left, #f8fafc, transparent);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Responsive Padding Fixes */
+@media (max-width: 768px) {
+    .sectors-stream {
+        padding-top: 50px;
+        padding-bottom: 60px;
+    }
+    .stream-card {
+        width: 240px;
+    }
+    .stream-fade-left,
+    .stream-fade-right {
+        width: 80px;
+    }
+}
+/* logo */
+/* ==========================================================
+   NEW SLEEK JOB CARD STYLING (SPARROW SHARP)
+   ========================================================== */
+.featured-jobs {
+    background-color: #f8fafc;
+    padding-top: 80px;
+    padding-bottom: 100px;
+}
+
+/* Sleek Card Layout */
+.job-card-sleek {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 24px;
+    position: relative;
+    transition: all 0.35s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+}
+
+/* Subtle top highlight bar on hover */
+.job-card-sleek::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 24px;
+    right: 24px;
+    height: 3px;
+    background: transparent;
+    border-radius: 0 0 4px 4px;
+    transition: background 0.3s ease;
+}
+
+.job-card-sleek:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(60, 74, 79, 0.08);
+    border-color: #cbd5e1;
+}
+
+.job-card-sleek:hover::before {
+    background: var(--sparrow-green);
+}
+
+/* Company Logo Badge */
+.company-logo-badge {
+    width: 44px;
+    height: 44px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Status Badges */
+.badge-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 30px;
+    letter-spacing: 0.3px;
+}
+
+.urgency-badge {
+    background-color: rgba(239, 68, 68, 0.08);
+    color: #ef4444;
+}
+
+.remote-badge {
+    background-color: rgba(13, 148, 136, 0.08);
+    color: #0d9488;
+}
+
+.fulltime-badge {
+    background-color: rgba(99, 141, 63, 0.08);
+    color: var(--sparrow-green);
+}
+
+.hot-badge {
+    background-color: rgba(245, 158, 11, 0.08);
+    color: #f59e0b;
+}
+
+/* Typography */
+.job-title-sleek {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--sparrow-dark);
+}
+
+.company-sub {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Meta List (Location & Salary) */
+.job-meta-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.job-meta-list span {
+    font-size: 0.82rem;
+    color: #64748b;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.job-meta-list span i {
+    color: #94a3b8;
+}
+
+/* Card Bottom Footer */
+.job-card-bottom {
+    border-top: 1px solid #f1f5f9;
+    margin-top: auto;
+}
+
+.time-ago {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* View Details Action Link */
+.view-link-btn {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--sparrow-dark);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.view-link-btn:hover {
+    color: var(--sparrow-green);
+}
+
+/* Responsive Padding Fix */
+@media (max-width: 991px) {
+    .featured-jobs {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+}
+
+/* our sectors */
+/* ==========================================================
+   EXPLORE SECTORS SECTION STYLING (SPARROW SHARP)
+   ========================================================== */
+.explore-sectors-section {
+    background-color: #ffffff;
+    padding-top: 80px;
+    padding-bottom: 100px;
+}
+
+/* Sector Sleek Card */
+.sector-card-sleek {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.sector-card-sleek:hover {
+    transform: translateY(-5px);
+    background: #ffffff;
+    box-shadow: 0 15px 30px rgba(60, 74, 79, 0.08);
+    border-color: var(--sparrow-green);
+}
+
+/* Icon Box */
+.sector-icon-box {
+    width: 48px;
+    height: 48px;
+    background: rgba(99, 141, 63, 0.08);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.sector-card-sleek:hover .sector-icon-box {
+    background: var(--sparrow-green);
+}
+
+.sector-card-sleek:hover .sector-icon-box i {
+    color: #ffffff !important;
+}
+
+/* Typography */
+.sector-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--sparrow-dark);
+}
+
+.sector-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+/* Responsive Padding Fix */
+@media (max-width: 991px) {
+    .explore-sectors-section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+}
+
+/* ==========================================================
+   MOBILE TOUCH & CLICK FEEDBACK FIX
+   ========================================================== */
+.job-card-sleek:active,
+.sector-card-sleek:active {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 25px rgba(60, 74, 79, 0.1) !important;
+    border-color: var(--sparrow-green) !important;
+}
+
+/* Optional: Agar aap chahte hain ke click hone ke baad card thodi der active state mein rahe */
+.job-card-sleek:focus,
+.sector-card-sleek:focus {
+    outline: none;
+    border-color: var(--sparrow-green);
+    box-shadow: 0 12px 25px rgba(60, 74, 79, 0.1);
+}
+/* our sectors
+ */
+
+/* testimonials */
+/* ============ PREMIUM REVIEWS SECTION (SPACED OUT) ============ */
+.reviews-section {
+    background-color: #f8f9fc;
+}
+
+/* --- Left Side Stats --- */
+.rating-box {
+    transition: transform 0.3s;
+    border: 1px solid #fff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05) !important;
+}
+.rating-box:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-pink);
+}
+
+/* --- The Marquee Wrapper --- */
+.reviews-wrapper-mask {
+    height: 650px; /* Thoda height badhaya taaki content khula dikhe */
+    overflow: hidden;
+    position: relative;
+    padding: 10px; /* Side padding taaki shadow cut na ho */
+    /* Smooth Fade Effect */
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 15%,
+        black 85%,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 15%,
+        black 85%,
+        transparent
+    );
+}
+
+/* Vertical Column Layout */
+.marquee-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 35px; /* IMPORTNAT: Gap badhaya taaki chipke nahi (20px -> 35px) */
+    padding-bottom: 35px; /* Loop ke beech me gap maintain karne ke liye */
+}
+
+/* Animation Speeds */
+.marquee-up {
+    animation: scrollUp 45s linear infinite; /* Thoda slow kiya smooth look ke liye */
+}
+
+.marquee-down {
+    animation: scrollDown 45s linear infinite;
+}
+
+/* Hover Pe Rukna */
+.reviews-grid:hover .marquee-vertical {
+    animation-play-state: paused;
+}
+
+@keyframes scrollUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(calc(-50% - 17.5px));
+    } /* Gap calculation fix */
+}
+
+@keyframes scrollDown {
+    0% {
+        transform: translateY(calc(-50% - 17.5px));
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* --- Review Card Design --- */
+.review-card {
+    background: #fff;
+    padding: 25px; /* Padding badhai */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); /* Soft Shadow */
+    border: 1px solid #f2f2f2;
+    transition: all 0.3s ease;
+    /* Card ko thoda "Utha hua" dikhane ke liye */
+    transform: translateZ(0);
+}
+
+.review-card:hover {
+    box-shadow: 0 20px 40px rgba(230, 2, 120, 0.12);
+    border-color: rgba(230, 2, 120, 0.3);
+    transform: translateY(-5px) scale(1.01); /* Thoda zoom effect */
+}
+
+/* Header inside card */
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Logo aur naam ke beech gap badhaya */
+    margin-bottom: 15px;
+}
+
+.review-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f8f9fa; /* Border mota kiya */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.review-header h5 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--dark-blue);
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.review-header small {
+    font-size: 0.85rem;
+    color: #999;
+    font-weight: 500;
+}
+
+.review-card p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6; /* Line height badhaya readability ke liye */
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.stars-mini {
+    color: #ffc107;
+    font-size: 0.9rem;
+    background: #fffdf5;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 50px;
+    border: 1px solid #fff3cd;
+}
+
+/* Highlight Card Style */
+.highlight-card {
+    background: linear-gradient(to bottom, #fff, #fff0f7);
+    border-color: #ffd6e8;
+}
+
+/* Responsive Fixes */
+@media (max-width: 991px) {
+    .reviews-wrapper-mask {
+        height: 500px;
+        mask-image: none; /* Mobile pe mask hata sakte hain agar clear dikhana ho */
+        -webkit-mask-image: none;
+        overflow-y: auto; /* Allow manual scroll on mobile */
+    }
+    .marquee-vertical {
+        animation: none; /* Disable animation on mobile for better UX */
+        gap: 20px;
+    }
+    .col-md-4 {
+        margin-bottom: 20px;
+    }
+}
+
+/* blogs */
+/* ==========================================================
+   MINIMALIST STATIC JOB CARDS STYLING (SPARROW SHARP)
+   ========================================================== */
+.featured-jobs-clean {
+    padding-top: 80px;
+    padding-bottom: 100px;
+}
+
+.job-card-minimal {
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+    /* Stable card layout - no jumping or aggressive moving on hover */
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.job-card-minimal:hover {
+    border-color: var(--sparrow-green);
+    box-shadow: 0 12px 30px rgba(60, 74, 79, 0.06);
+}
+
+.job-title {
+    transition: color 0.2s ease;
+}
+
+.job-title:hover {
+    color: var(--sparrow-green) !important;
+}
+
+/* Responsive Padding Fix */
+@media (max-width: 991px) {
+    .featured-jobs-clean {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+}
+
+/* featured */
+
+/* jobs  */
+/* ============ VACANCIES PAGE STYLES ============ */
+
+/* --- Page Header --- */
+/* --- Fix for Page Header Spacing --- */
+.page-header {
+    background-color: var(--dark-blue);
+    /* Agar content navbar ke peeche ja raha hai, to ye value badhayein */
+    padding-top: 140px !important; /* Pehle 100px tha, ab 140px kiya hai */
+    padding-bottom: 60px;
+    margin-top: -50px; /* Ye navbar ke background ko cover karega agar transparent hai */
+}
+
+/* Agar Navbar transparent nahi hai, to ye use karein: */
+/*
+.page-header {
+    margin-top: 0;
+    padding-top: 60px;
+}
+*/
+
+.header-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.1;
+    background-image: radial-gradient(#fff 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* --- Sidebar Filters --- */
+.filters-sidebar {
+    /* Sticky behavior handle in HTML via 'sticky-top' class */
+}
+
+.filter-group label {
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+}
+
+/* Custom Checkboxes */
+.form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+.form-check-input:checked {
+    background-color: var(--primary-pink);
+    border-color: var(--primary-pink);
+}
+
+.form-check-label {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+/* Salary Range Slider */
+.form-range::-webkit-slider-thumb {
+    background: var(--primary-pink);
+}
+
+/* --- Job Row Cards (List View) --- */
+.job-row-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.job-row-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important; /* Stronger shadow on hover */
+    border-color: rgba(230, 2, 120, 0.3) !important;
+}
+
+/* Left Pink Line indicator for featured jobs */
+.featured-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--primary-pink);
+    opacity: 0; /* Hidden by default */
+    transition: 0.3s;
+}
+
+.job-row-card:hover .featured-indicator {
+    opacity: 1; /* Show on hover */
+}
+
+/* Big Logo Box */
+.company-logo-lg {
+    width: 70px;
+    height: 70px;
+    background: #f8f9fa;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Job Pills (Tags) */
+.job-pill {
+    font-size: 0.8rem;
+    color: #666;
+    background: #f4f6f8;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* --- Pagination (Modern Pill) --- */
+.pagination-pill {
+    gap: 8px;
+}
+
+.pagination-pill .page-link {
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-blue);
+    font-weight: 700;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.pagination-pill .page-item.active .page-link {
+    background: var(--primary-pink);
+    color: #fff;
+}
+
+.pagination-pill .page-link:hover {
+    background: #eee;
+    color: var(--primary-pink);
+}
+
+/* Responsive Tweak for Mobile */
+@media (max-width: 768px) {
+    .job-row-card {
+        flex-direction: column; /* Stack content on mobile */
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .company-logo-lg {
+        width: 50px;
+        height: 50px;
+    }
+    .ms-auto {
+        margin-left: 0 !important;
+        width: 100%;
+    }
+    .btn-apply {
+        width: 100%;
+        text-align: center;
+    }
+    .text-end {
+        text-align: left !important;
+        margin-top: 5px;
+    }
+}
+
+/* ============ JOB CARD STYLING ============ */
+
+/* Custom Scroll & Layout Fix */
+/* =====================================================
+   SPARROW SHARP MODERN VACANCIES DESIGN
+===================================================== */
+
+.vacancies-section {
+    background: var(--sparrow-light);
+    padding: 90px 0;
+}
+
+/* Header */
+
+.page-header {
+    background: linear-gradient(135deg, #3c4a4f, #263238);
+    border-radius: 0 0 40px 40px;
+}
+
+.page-header h1 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    letter-spacing: -1px;
+}
+
+/* Search Box */
+
+.input-group {
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.input-group .form-control {
+    height: 52px;
+}
+
+.input-group .btn {
+    background: var(--sparrow-green);
+    border: none;
+    color: white;
+    padding: 0 28px;
+}
+
+.input-group .btn:hover {
+    background: #527532;
+}
+
+/* =====================================================
+   FILTER SIDEBAR
+===================================================== */
+
+.filters-sidebar {
+    border-radius: 24px !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05) !important;
+}
+
+.filters-sidebar h5 {
+    color: var(--sparrow-dark);
+}
+
+.filter-checkbox {
+    accent-color: var(--sparrow-green);
+}
+
+.filter-checkbox:checked + label {
+    color: var(--sparrow-green);
+    font-weight: 600;
+}
+
+/* =====================================================
+   JOB CARDS NEW DESIGN
+===================================================== */
+
+.job-grid-card {
+    background: white;
+    border-radius: 24px !important;
+    padding: 28px !important;
+
+    border: 1px solid #e8edf0 !important;
+
+    box-shadow: 0 10px 30px rgba(60, 74, 79, 0.06);
+
+    transition: all 0.35s ease;
+
+    height: 100%;
+}
+
+/* .job-grid-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color: var(--sparrow-green) !important;
+
+    box-shadow:
+    0 20px 45px rgba(60,74,79,.12);
+
+} */
+
+/* Company Icon */
+
+.company-logo-sm {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(99, 141, 63, 0.1) !important;
+}
+
+.company-logo-sm i {
+    color: var(--sparrow-green) !important;
+}
+
+/* Save Button */
+
+.btn-save-job {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #f8fafc;
+
+    border: 1px solid #e5e7eb;
+
+    color: #64748b;
+
+    transition: 0.3s;
+}
+
+.btn-save-job:hover {
+    background: var(--sparrow-green);
+
+    color: white;
+}
+
+/* Job Title */
+
+.job-grid-card h5 {
+    color: var(--sparrow-dark) !important;
+
+    font-size: 1.15rem;
+
+    line-height: 1.4;
+}
+
+/* Company */
+
+.job-grid-card p i {
+    color: var(--sparrow-green);
+}
+
+/* Badges */
+
+.job-grid-card .badge {
+    background: #f4f7f2 !important;
+
+    color: var(--sparrow-green) !important;
+
+    border: 1px solid rgba(99, 141, 63, 0.2) !important;
+
+    padding: 8px 14px;
+
+    font-weight: 600;
+}
+
+/* Buttons */
+
+.btn-custom {
+    background: var(--sparrow-green) !important;
+
+    color: white !important;
+
+    border: none !important;
+}
+
+.btn-custom:hover {
+    background: #527532 !important;
+}
+
+.btn-outline-dark {
+    border-color: #3c4a4f !important;
+
+    color: #3c4a4f !important;
+}
+
+.btn-outline-dark:hover {
+    background: var(--sparrow-dark) !important;
+
+    color: white !important;
+}
+
+/* =====================================================
+   PAGINATION
+===================================================== */
+
+.pagination .page-link {
+    border-radius: 12px;
+
+    margin: 0 4px;
+
+    color: var(--sparrow-dark);
+}
+
+.pagination .active .page-link {
+    background: var(--sparrow-green);
+
+    border-color: var(--sparrow-green);
+}
+
+/* =====================================================
+   MOBILE RESPONSIVE
+===================================================== */
+
+@media (max-width: 991px) {
+    .vacancies-section {
+        padding: 60px 0;
+    }
+
+    .page-header {
+        border-radius: 0 0 25px 25px;
+    }
+
+    .filters-sidebar {
+        position: relative !important;
+
+        top: 0 !important;
+
+        margin-bottom: 25px;
+    }
+
+    .job-grid-card {
+        padding: 22px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .input-group {
+        flex-direction: column;
+
+        background: transparent !important;
+
+        gap: 10px;
+    }
+
+    .input-group .btn {
+        width: 100%;
+
+        height: 50px;
+    }
+
+    .job-grid-card h5 {
+        font-size: 1rem;
+    }
+}
+
+/* jobs end */
+/* jobs details start */
+/* ============ JOB DETAILS PAGE STYLES ============ */
+.company-logo-large {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.job-list-points {
+    padding-left: 1.5rem;
+}
+
+.job-list-points li {
+    margin-bottom: 15px;
+    position: relative;
+    list-style: none;
+}
+
+.job-list-points li::before {
+    content: "\f058"; /* FontAwesome Circle Check */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    left: -1.5rem;
+    color: var(--primary-pink);
+}
+
+/* .social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f8f9fa;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.social-btn:hover {
+    background: var(--primary-pink);
+    color: white;
+}
+
+.bg-pink-light {
+    background-color: rgba(230, 2, 120, 0.1);
+} */
+
+/* --- Social Buttons 2026 Style --- */
+.social-btn {
+    width: 45px;
+    height: 45px;
+    background: #f8f9fa; /* Light grey base */
+    color: #0d1b2a;
+    border-radius: 12px; /* Professional rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Individual Brand Hovers (No Shaking, Just Smooth Color) */
+.social-btn:hover {
+    transform: translateY(-5px);
+    color: black !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.social-btn.facebook:hover {
+    background: #1877f2; /* Official Facebook Blue */
+    border-color: #1877f2;
+}
+
+.social-btn.linkedin:hover {
+    background: #0077b5; /* Official LinkedIn Blue */
+    border-color: #0077b5;
+}
+
+.social-btn.instagram:hover {
+    background: radial-gradient(
+        circle at 30% 107%,
+        #fdf497 0%,
+        #fdf497 5%,
+        #fd5949 45%,
+        #d6249f 60%,
+        #285aeb 90%
+    );
+    border-color: #d6249f;
+}
+
+/* Spacing fix for mobile */
+@media (max-width: 768px) {
+    .social-wrapper {
+        text-align: center;
+    }
+    .social-wrapper .d-flex {
+        justify-content: center;
+    }
+}
+/* jobs deytails end */
+
+/* form submit jobsss */
+.success-icon i {
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* form submit jobs  */
+
+/* about page */
+/* About Page Specific Styles */
+/* .about-banner-initial {
+    background: linear-gradient(45deg, #1A2980, #26D0CE);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-banner-initial .bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.bwsrecruitment.com.au/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNVROSlE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--8df6b579d14665dfbd3eaa983592dde1854de09a/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRGpJd01EQjROakF3WGdZN0JsUTZER2R5WVhacGRIbEpJZ3REWlc1MFpYSUdPd1pVT2dsamNtOXdTU0lSTWpBd01IZzJNREFyTUNzd0Jqc0dWQT09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--e93b4d5ce0ecf2b659c4788a841a1a7096b298e6/image-2024-08-30T06-25-57.452Z.jpg"><defs><pattern id="p" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M0 0h5v5H0z" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23p)"/></svg>');
+    opacity: 0.2;
+    z-index: 0;
+} */
+/* About Banner Theme Fix */
+.about-banner-initial {
+    background-color: #0d1b2a; /* Your exact Dark Blue from Home/Jobs page */
+    position: relative;
+    z-index: 1;
+}
+
+/* Subtle Gradient Overlay matching your branding */
+.theme-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(255, 20, 147, 0.1),
+            transparent
+        ),
+        radial-gradient(
+            circle at bottom left,
+            rgba(13, 27, 42, 0.9),
+            transparent
+        );
+    z-index: -1;
+}
+
+/* Pattern Overlay (Same as your Jobs Header) */
+.about-banner-initial::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://www.bwsrecruitment.com.au/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNVROSlE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--8df6b579d14665dfbd3eaa983592dde1854de09a/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRGpJd01EQjROakF3WGdZN0JsUTZER2R5WVhacGRIbEpJZ3REWlc1MFpYSUdPd1pVT2dsamNtOXdTU0lSTWpBd01IZzJNREFyTUNzd0Jqc0dWQT09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--e93b4d5ce0ecf2b659c4788a841a1a7096b298e6/image-2024-08-30T06-25-57.452Z.jpg"); /* Subtle cube pattern */
+    opacity: 0.1;
+    z-index: -1;
+}
+
+/* Success Modal & Carousel Captions Consistency */
+.carousel-caption-content {
+    border-top: 4px solid #ff1493; /* Pink accent like your job detail badges */
+}
+
+/* .btn-custom {
+    background-color: #FF1493;
+    border-color: #FF1493;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #d8117a;
+    border-color: #d8117a;
+} */
+.about-banner-initial .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Carousel Section Styles */
+.about-carousel-section .carousel-item {
+    height: 500px; /* Adjust as needed */
+    position: relative;
+}
+
+.about-carousel-section .carousel-img {
+    filter: brightness(0.6); /* Darken image slightly */
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.about-carousel-section .carousel-caption {
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay to make text readable */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-carousel-section .carousel-caption-content {
+    max-width: 600px;
+    padding: 30px !important;
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.95
+    ) !important; /* Semi-transparent white */
+}
+
+/* Custom Carousel Controls */
+.about-carousel-section .carousel-control-prev-icon,
+.about-carousel-section .carousel-control-next-icon {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.about-carousel-section .carousel-control-prev-icon:hover,
+.about-carousel-section .carousel-control-next-icon:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.about-carousel-section .carousel-indicators button {
+    background-color: #ff69b4; /* Pink indicators */
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.about-carousel-section .carousel-indicators button.active {
+    opacity: 1;
+    transform: scale(1.2);
+    background-color: #ff1493; /* Darker pink for active */
+}
+
+/* Text color for specific elements */
+.text-dark-blue {
+    color: #1a2980; /* Define your custom dark blue if not already defined */
+}
+.text-pink {
+    color: #ff1493; /* Define your custom pink if not already defined */
+}
+
+/* Animate.css integration (ensure you have it linked in your layout) */
+/* Example: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/> */
+
+/* Custom hover effect for links */
+.hover-pink:hover {
+    color: #ff1493 !important;
+    transition: color 0.3s ease;
+}
+
+/* Small adjustments for responsiveness */
+@media (max-width: 768px) {
+    .about-banner-initial {
+        min-height: 350px;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+    .about-carousel-section .carousel-item {
+        height: 400px;
+    }
+    .about-carousel-section .carousel-caption-content {
+        padding: 20px !important;
+        font-size: 0.9rem;
+    }
+    .about-carousel-section .carousel-caption-content h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Click transition for About Section */
+.about-carousel-section.active {
+    display: block !important;
+    animation: zoomInSoft 0.8s ease-out forwards;
+}
+
+@keyframes zoomInSoft {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* White Box Overlay Styling (As per your screenshot) */
+.carousel-caption-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 550px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Ken Burns Smooth Zoom Animation */
+.carousel-img-container {
+    height: 650px;
+    overflow: hidden;
+}
+
+.ken-burns {
+    height: 100%;
+    object-fit: cover;
+    animation: kenburns 15s infinite alternate;
+}
+
+@keyframes kenburns {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.15);
+    }
+}
+
+/* 2026 Modern Overlay */
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 27, 42, 0.6); /* Dark Blue tint */
+}
+
+.carousel-caption-content {
+    max-width: 500px;
+    border-radius: 30px !important;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.carousel-item.active .carousel-caption-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Stylish Floating Navigation */
+.custom-carousel-nav {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+}
+
+.nav-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: #ff1493; /* Pink Hover */
+    border-color: #ff1493;
+    transform: scale(1.1);
+}
+
+.carousel-indicators {
+    bottom: 70px !important;
+    left: 50px !important;
+    margin: 0 !important;
+    justify-content: start !important;
+}
+/* about page */
+/* --- Performance & Theme Base --- */
+.about-banner-initial {
+    background-color: #0d1b2a;
+    z-index: 1;
+    will-change: opacity;
+}
+
+.theme-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at top right,
+        rgba(255, 20, 147, 0.1),
+        transparent
+    );
+    z-index: -1;
+}
+
+/* --- Ken Burns & Image Optimization --- */
+.carousel-img-container {
+    height: 70vh; /* Responsive Height */
+    min-height: 450px;
+    overflow: hidden;
+    background: #000;
+}
+
+.ken-burns {
+    height: 100%;
+    object-fit: cover;
+    will-change: transform;
+    animation: kenburns 20s infinite alternate linear;
+    transform: translateZ(0); /* GPU Force */
+}
+
+@keyframes kenburns {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+/* --- Caption White Box (2026 Style) --- */
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 27, 42, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+.carousel-caption-content {
+    max-width: 550px;
+    border-radius: 25px !important;
+    border-top: 5px solid #ff1493;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.carousel-item.active .carousel-caption-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Mobile Navigation --- */
+.custom-carousel-nav {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+
+.nav-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: #ff1493;
+    border-color: #ff1493;
+}
+
+/* --- Mobile View Adjustments --- */
+@media (max-width: 768px) {
+    .carousel-img-container {
+        height: 60vh;
+    }
+    .carousel-caption-content {
+        padding: 30px 20px !important;
+        margin: 0 15px;
+    }
+    .small-mobile {
+        font-size: 0.9rem;
+    }
+    .custom-carousel-nav {
+        right: 50%;
+        transform: translateX(50%); /* Center nav on mobile */
+        bottom: 20px;
+    }
+    .nav-btn {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* new section team details avbout us */
+/* --- Leadership Section Styling --- */
+.leader-image-frame {
+    position: relative;
+    padding-right: 30px;
+    padding-bottom: 30px;
+}
+
+.frame-border {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    right: 0;
+    bottom: 0;
+    border: 8px solid rgba(255, 20, 147, 0.1); /* Light Pink Border */
+    border-radius: 20px;
+    z-index: 0;
+}
+
+.main-leader-img {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.main-leader-img:hover {
+    transform: translate(-10px, -10px);
+}
+
+.experience-tag {
+    position: absolute;
+    bottom: 10px;
+    right: -20px;
+    z-index: 2;
+    min-width: 140px;
+    text-align: center;
+    background-color:#557935 ;
+}
+
+.italic-role {
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+.content-divider {
+    width: 80px;
+    height: 4px;
+    background: #557935 ;
+    border-radius: 2px;
+}
+
+/* --- Signature & Socials --- */
+.signature-img {
+    max-height: 60px;
+    filter: grayscale(1) contrast(1.5);
+    opacity: 0.7;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f0f2f5;
+    color: #0d1b2a;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: #ff1493;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* --- Value Card Modern --- */
+.value-card-modern {
+    transition: all 0.3s ease;
+    border-bottom: 4px solid transparent;
+}
+
+.value-card-modern:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+    border-bottom: 4px solid #ff1493;
+}
+
+.v-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 20, 147, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* --- Responsive Fixes --- */
+@media (max-width: 991px) {
+    .experience-tag {
+        right: 10px;
+        bottom: 0;
+    }
+    .leader-image-frame {
+        padding: 0;
+        margin-bottom: 40px;
+    }
+    .frame-border {
+        display: none;
+    }
+}
+
+/* about page profile images details end */
+
+/* purpouse */
+/* --- Purpose Section Styling --- */
+.purpose-quote-box {
+    background: rgba(255, 20, 147, 0.03);
+    border-left: 5px solid #ff1493;
+}
+
+/* --- Advance Value Cards --- */
+.value-card-advance {
+    background: #ffffff;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+}
+
+.v-icon-main {
+    width: 60px;
+    height: 60px;
+    background: #0d1b2a;
+    color: #fff;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: 0.3s;
+}
+
+.value-icon-bg {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 8rem;
+    color: rgba(255, 20, 147, 0.04);
+    z-index: 1;
+    transition: 0.5s;
+    transform: rotate(-15deg);
+}
+
+.value-card-advance:hover {
+    /* transform: translateY(-12px); */
+    background: #0d1b2a; /* Dark Blue on Hover */
+    box-shadow: 0 25px 50px rgba(13, 27, 42, 0.2) !important;
+}
+
+.value-card-advance:hover .v-icon-main {
+    background: #ff1493; /* Pink on Hover */
+    transform: rotate(360deg);
+}
+
+.value-card-advance:hover h4 {
+    color: #ffffff !important;
+}
+
+.value-card-advance:hover .text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.value-card-advance:hover .value-icon-bg {
+    color: rgba(255, 20, 147, 0.1);
+    transform: scale(1.2) rotate(0deg);
+}
+
+/* --- Animation for Scroll --- */
+.value-card-advance {
+    opacity: 1;
+    animation: fadeInUp 0.8s ease-out;
+}
+/* --- Join Team Background Styling --- */
+.join-team-section {
+    background: #fdfdfd;
+}
+
+.glow-element {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.1;
+    z-index: 1;
+}
+.glow-1 {
+    background: #ff1493;
+    top: -100px;
+    left: -100px;
+}
+.glow-2 {
+    background: #0d1b2a;
+    bottom: -100px;
+    right: -100px;
+}
+
+/* --- Benefit Items (Static but High-End) --- */
+.benefit-item {
+    transition: all 0.3s ease;
+}
+.benefit-item:hover {
+    background: #0d1b2a !important;
+    border-start-color: #ff1493 !important;
+}
+.benefit-item:hover span {
+    color: white !important;
+}
+
+/* --- CTA Glass Card --- */
+.cta-glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 20, 147, 0.1);
+}
+
+.cta-glass-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 20, 147, 0.05) 0%,
+        transparent 70%
+    );
+}
+
+/* --- 2026 Pulse Button --- */
+.btn-pulse-pink {
+    display: inline-block;
+    padding: 18px 45px;
+    background: #ff1493;
+    color: white !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    text-decoration: none;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(255, 20, 147, 0.3);
+    transition: all 0.4s ease;
+}
+
+.btn-pulse-pink:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 20, 147, 0.4);
+}
+
+.btn-pulse-pink::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px;
+    border: 2px solid #ff1493;
+    animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+}
+
+/* --- Mobile Fixes --- */
+@media (max-width: 768px) {
+    .btn-pulse-pink {
+        width: 100%;
+        text-align: center;
+    }
+    .cta-glass-card {
+        margin-top: 30px;
+    }
+}
+
+/* ==========================================================
+   DISCIPLINES & SECTORS STYLING (SPARROW SHARP)
+   ========================================================== */
+
+/* --- Header Style --- */
+/* ==========================================================
+   MODERN CINEMATIC DISCIPLINES HEADER (SPARROW SHARP)
+   ========================================================== */
+/* ==========================================================
+   MODERN CINEMATIC DISCIPLINES HEADER (SPARROW SHARP)
+   ========================================================== */
+.disciplines-header {
+    background:
+        linear-gradient(rgba(60, 74, 79, 0.9), rgba(60, 74, 79, 0.95)),
+        url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7uwgUHsUMf0Ov31_2ca4DQ-frlrUoPg81TbPccrPnmA&s=10")
+            no-repeat center center;
+    background-size: cover;
+    padding-top: 90px !important;
+    padding-bottom: 90px !important;
+    border-bottom: 3px solid var(--sparrow-green);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.glow-bg {
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 140%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(99, 141, 63, 0.12) 0%,
+        transparent 60%
+    );
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .disciplines-header {
+        padding-top: 60px !important;
+        padding-bottom: 60px !important;
+    }
+}
+.glow-bg {
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(99, 141, 63, 0.12) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+/* --- Sector Cards --- */
+.sector-card-link {
+    text-decoration: none;
+}
+
+.sector-card {
+    height: 380px;
+    background: #000;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.sector-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.75;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sector-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 35px 25px;
+    background: linear-gradient(transparent, rgba(60, 74, 79, 0.95));
+    transition: all 0.4s ease;
+}
+
+.sector-content {
+    transform: translateY(30px);
+    transition: all 0.4s ease;
+}
+
+.explore-btn {
+    opacity: 0;
+    font-weight: 700;
+    color: var(--sparrow-green); /* #638D3F */
+    font-size: 0.88rem;
+    display: inline-block;
+    transition: all 0.4s ease;
+}
+
+/* --- Hover Effects --- */
+.sector-card:hover .sector-img {
+    transform: scale(1.08);
+    opacity: 0.55;
+}
+
+.sector-card:hover .sector-overlay {
+    background: linear-gradient(transparent, rgba(60, 74, 79, 0.98));
+}
+
+.sector-card:hover .sector-content {
+    transform: translateY(0);
+}
+
+.sector-card:hover .explore-btn {
+    opacity: 1;
+}
+
+/* --- Mobile Fixes --- */
+@media (max-width: 768px) {
+    .sector-card {
+        height: 320px;
+    }
+    .sector-content {
+        transform: translateY(0);
+    }
+    .explore-btn {
+        opacity: 1;
+    }
+    .disciplines-header {
+        margin-top: 0;
+    }
+}
+
+/* ==========================================================
+   DISCIPLINES DETAIL / SHOW PAGE STYLING
+   ========================================================== */
+.sector-hero {
+    background-color: var(--sparrow-dark);
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+}
+
+.sector-bg-glow {
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(
+        circle,
+        rgba(99, 141, 63, 0.15) 0%,
+        transparent 70%
+    );
+    filter: blur(80px);
+    pointer-events: none;
+}
+
+.shadow-2xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* --- Bento Grid Styling --- */
+.bento-card,
+.bento-card-wide {
+    background: #f8fafc;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 20px;
+}
+
+.bento-card:hover {
+    transform: translateY(-6px);
+    background: #fff;
+    box-shadow: 0 15px 30px rgba(60, 74, 79, 0.08) !important;
+    border-color: var(--sparrow-green) !important;
+}
+
+.icon-header {
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.role-tag-modern {
+    background: white;
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--sparrow-dark);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    transition: 0.3s;
+}
+
+.role-tag-modern:hover {
+    border-color: var(--sparrow-green);
+    color: var(--sparrow-green);
+    transform: translateY(-2px);
+}
+
+/* --- CTA Section --- */
+.cta-inner {
+    background: linear-gradient(135deg, var(--sparrow-dark) 0%, #293337 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+}
+
+/* --- Mobile Fixes --- */
+@media (max-width: 768px) {
+    .sector-hero {
+        min-height: 50vh;
+        text-align: center;
+    }
+    .bento-card-wide {
+        padding: 25px !important;
+    }
+}
+/* contact us */
+/* --- Hero & Background --- */
+/* .contact-hero {
+    background: #0d1b2a;
+    padding-top: 100px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.glow-bg {
+    position: absolute; top: -10%; right: -5%; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(230, 2, 120, 0.1) 0%, transparent 70%);
+    filter: blur(80px);
+} */
+
+/* --- Premium Sidebar Cards --- */
+.info-card-premium {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+    background: #fff;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.info-card-premium:hover {
+    border-color: rgba(230, 2, 120, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transform: translateX(5px);
+}
+
+.icon-wrap {
+    width: 45px;
+    height: 45px;
+    background: rgba(230, 2, 120, 0.05);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #638d3f;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.flip-phone {
+    transform: scaleX(-1);
+}
+
+.text-wrap {
+    margin-left: 15px;
+}
+.text-wrap h6 {
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: #1a1a2e;
+}
+.text-wrap p {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+/* --- Contact Form Card --- */
+.contact-form-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+}
+
+.form-control {
+    background: #f8f9fa;
+    border: 2px solid #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background: #fff;
+    border-color: #638d3f;
+    box-shadow: 0 8px 20px rgba(230, 2, 120, 0.05);
+}
+
+.btn-premium-pink {
+    background: #638d3f;
+    color: #fff;
+    border: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-premium-pink:hover {
+    background: #c90269;
+    box-shadow: 0 10px 20px rgba(230, 2, 120, 0.3);
+}
+
+/* --- Map --- */
+.map-container {
+    filter: grayscale(1) contrast(1.1);
+    opacity: 0.8;
+    transition: 0.5s;
+}
+.map-container:hover {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .contact-form-card {
+        padding: 25px;
+    }
+    .contact-hero {
+        padding-top: 60px;
+    }
+}
+
+/* profile */
+/* --- User Profile Dash 2026 --- */
+.avatar-large {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--primary-pink), #ff5e62);
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 30px rgba(230, 2, 120, 0.2);
+}
+
+.avatar-edit-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 35px;
+    height: 35px;
+    background: #fff;
+    color: var(--primary-pink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border: 2px solid var(--primary-pink);
+}
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+.bg-blue-light {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+.bg-pink-light {
+    background: #fff1f2;
+    color: #e11d48;
+}
+.bg-success-light {
+    background: #f0fdf4;
+    color: #16a34a;
+}
+
+/* Profile Tabs */
+.profile-tabs .nav-link {
+    background: #f8f9fa;
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    transition: 0.3s;
+}
+.profile-tabs .nav-link.active {
+    background: var(--primary-pink) !important;
+    color: #fff !important;
+}
+
+.company-logo-sm {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #999;
+    border: 1px solid #eee;
+}
+
+.rounded-5 {
+    border-radius: 2rem !important;
+}
+
+/* logo */
+.brand-logo {
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 576px) {
+    .brand-logo {
+        height: 42px;
+    }
+}
