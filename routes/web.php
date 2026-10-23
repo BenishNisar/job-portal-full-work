@@ -41,6 +41,8 @@ use App\Http\Controllers\NeedHelpController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\ServiceController;
 
+use App\Http\Controllers\AIChatController;
+
 use Illuminate\Support\Facades\DB;
 
 
@@ -311,4 +313,12 @@ Route::post('/disciplines/store', [BackendDisciplinesController::class, 'store']
 Route::get('/disciplines/{id}/edit', [BackendDisciplinesController::class, 'edit'])->name('Dashboard.admin.disciplines.edit');
 Route::put('/disciplines/{id}/update', [BackendDisciplinesController::class, 'update'])->name('Dashboard.admin.disciplines.update');
 Route::delete('/disciplines/{id}/delete', [BackendDisciplinesController::class, 'destroy'])->name('Dashboard.admin.disciplines.delete');
+
+
+Route::post('/ai-chat',
+[AIChatController::class,'ask'])
+->name('dashboard.ai.chat');
+
+
+
 });

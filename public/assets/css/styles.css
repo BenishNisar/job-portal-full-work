@@ -767,14 +767,12 @@ textarea {
 
     .about-content-area {
         padding-left: 0 !important;
-        text-align: center;
     }
 
     .about-content-area .row {
         justify-content: center;
     }
 }
-
 /* logo */
 /* ============ 2026 INFINITE STREAM ============ */
 /* ==========================================================
@@ -1337,7 +1335,13 @@ textarea {
         margin-bottom: 20px;
     }
 }
+@media (max-width: 767px) {
 
+    .reviews-grid .marquee-vertical .review-card:nth-child(n+3) {
+        display: none;
+    }
+
+}
 /* blogs */
 /* ==========================================================
    MINIMALIST STATIC JOB CARDS STYLING (SPARROW SHARP)
@@ -2794,14 +2798,16 @@ textarea {
 }
 
 /* ==========================================================
-   DISCIPLINES DETAIL / SHOW PAGE STYLING
+   DISCIPLINES DETAIL / SHOW PAGE STYLING (COMPLETE)
    ========================================================== */
+
 .sector-hero {
     background-color: var(--sparrow-dark);
     min-height: 75vh;
     display: flex;
     align-items: center;
-    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
 }
 
 .sector-bg-glow {
@@ -2821,6 +2827,33 @@ textarea {
 
 .shadow-2xl {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.hero-main-title {
+    font-size: 2.8rem;
+    line-height: 1.2;
+}
+
+/* Contact Us Button Custom Style for Dark Background */
+.btn-contact-custom {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.25s ease-in-out;
+}
+
+.btn-contact-custom:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: #ffffff;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.sector-hero .btn {
+    transition: all 0.25s ease-in-out;
+}
+
+.sector-hero .btn:hover {
+    transform: translateY(-2px);
 }
 
 /* --- Bento Grid Styling --- */
@@ -2878,133 +2911,35 @@ textarea {
 /* --- Mobile Fixes --- */
 @media (max-width: 768px) {
     .sector-hero {
-        min-height: 50vh;
-        text-align: center;
+        min-height: auto;
+        padding-top: 40px !important;
+        padding-bottom: 50px !important;
+        text-align: left;
     }
+
+    .sector-hero .container {
+        margin-top: 45px !important;
+    }
+
+    .hero-main-title {
+        font-size: 1.85rem !important;
+    }
+
+    .sector-hero .lead {
+        font-size: 0.9rem !important;
+        margin-bottom: 20px !important;
+    }
+
     .bento-card-wide {
-        padding: 25px !important;
+        padding: 20px !important;
+    }
+
+    .sector-hero .btn {
+                height: 38px;
+        padding: 8px 18px !important;
+        font-size: 0.85rem !important;
     }
 }
-/* contact us */
-/* --- Hero & Background --- */
-/* .contact-hero {
-    background: #0d1b2a;
-    padding-top: 100px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.glow-bg {
-    position: absolute; top: -10%; right: -5%; width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(230, 2, 120, 0.1) 0%, transparent 70%);
-    filter: blur(80px);
-} */
-
-/* --- Premium Sidebar Cards --- */
-.info-card-premium {
-    display: flex;
-    align-items: flex-start;
-    padding: 20px;
-    background: #fff;
-    border-radius: 16px;
-    margin-bottom: 15px;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
-}
-
-.info-card-premium:hover {
-    border-color: rgba(230, 2, 120, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transform: translateX(5px);
-}
-
-.icon-wrap {
-    width: 45px;
-    height: 45px;
-    background: rgba(230, 2, 120, 0.05);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #638d3f;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-}
-
-.flip-phone {
-    transform: scaleX(-1);
-}
-
-.text-wrap {
-    margin-left: 15px;
-}
-.text-wrap h6 {
-    font-weight: 700;
-    margin-bottom: 2px;
-    color: #1a1a2e;
-}
-.text-wrap p {
-    font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 0;
-    line-height: 1.4;
-}
-
-/* --- Contact Form Card --- */
-.contact-form-card {
-    background: #fff;
-    padding: 40px;
-    border-radius: 30px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
-}
-
-.form-control {
-    background: #f8f9fa;
-    border: 2px solid #f8f9fa;
-    padding: 15px 20px;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-}
-
-.form-control:focus {
-    background: #fff;
-    border-color: #638d3f;
-    box-shadow: 0 8px 20px rgba(230, 2, 120, 0.05);
-}
-
-.btn-premium-pink {
-    background: #638d3f;
-    color: #fff;
-    border: none;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-}
-
-.btn-premium-pink:hover {
-    background: #c90269;
-    box-shadow: 0 10px 20px rgba(230, 2, 120, 0.3);
-}
-
-/* --- Map --- */
-.map-container {
-    filter: grayscale(1) contrast(1.1);
-    opacity: 0.8;
-    transition: 0.5s;
-}
-.map-container:hover {
-    filter: grayscale(0);
-    opacity: 1;
-}
-
-@media (max-width: 768px) {
-    .contact-form-card {
-        padding: 25px;
-    }
-    .contact-hero {
-        padding-top: 60px;
-    }
-}
-
 /* profile */
 /* --- User Profile Dash 2026 --- */
 .avatar-large {

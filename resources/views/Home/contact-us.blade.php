@@ -1,6 +1,34 @@
 @extends('Layout.layout')
 @section('Content')
-{{-- 1. Contact Hero Banner with Background Image --}}
+
+<style>
+    .sms-consent-text {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        padding: 15px;
+        border-radius: 12px;
+        color: #64748b;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .sms-consent-text p {
+        margin-bottom: 10px;
+    }
+
+    .sms-consent-text a {
+        color: var(--sparrow-green);
+        font-weight: 600;
+        text-decoration: underline;
+    }
+
+    /* Custom styling to ensure checkbox background turns green when checked */
+    .custom-sparrow-checkbox:checked {
+        background-color: var(--sparrow-green) !important;
+        border-color: var(--sparrow-green) !important;
+    }
+</style>
+
 {{-- 1. Contact Hero Banner with Background Image --}}
 <section class="position-relative overflow-hidden text-white" id="contactBannerSparrow" style="margin-top: 80px; background-image: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), url('{{ asset('assets/images/contact-us.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="container py-5 position-relative z-2 text-center" style="padding-top: 80px !important; padding-bottom: 80px !important;">
@@ -92,6 +120,41 @@
                                 <textarea name="message" class="form-control" rows="5" placeholder="Your Message"></textarea>
                                 <div class="text-danger small mt-1 message_error" style="display:none;"></div>
                             </div>
+
+                            <div class="col-12">
+                                {{-- Professional SMS Consent Box Styling matching theme standards --}}
+                                <div class="p-4 rounded-3 border bg-light mb-3">
+                                    <div class="form-check ps-0 d-flex align-items-start gap-3">
+                                        <input
+                                            type="checkbox"
+                                            id="sms_consent"
+                                            name="sms_consent"
+                                            value="1"
+                                            class="form-check-input mt-1 flex-shrink-0 ms-0 custom-sparrow-checkbox"
+                                            style="width: 20px; height: 20px; cursor: pointer;"
+                                        >
+                                        <label class="form-check-label text-muted small lh-base cursor-pointer" for="sms_consent" style="text-align: left; font-size: 13.5px;">
+                                            I agree to receive communications by text message regarding recruitment updates, job opportunities, application updates, interview scheduling, and other employment related communications from SparrowSharp.
+                                        </label>
+                                    </div>
+
+                                    <div class="mt-3 text-muted" style="font-size: 11.5px; line-height: 1.6;">
+                                        <p class="mb-1">You may opt out by replying stop or ask for more information by replying help. Message frequency varies. Message and data rates may apply.</p>
+                                        <p class="mb-0">You may review our <a href="/privacy-policy" target="_blank" style="color: var(--sparrow-green); font-weight: 600; text-decoration: underline;">Privacy Policy</a> to learn how your data is used.</p>
+                                    </div>
+
+                                    <div id="sms_consent_error" class="text-danger small mt-2" style="display:none;"></div>
+                                </div>
+                            </div>
+<div class="col-12">
+    <div class="g-recaptcha"
+         data-sitekey="{{ config('services.recaptcha.site_key') }}">
+    </div>
+
+    <div class="text-danger small mt-2 g-recaptcha-response_error"
+         style="display:none;">
+    </div>
+</div>
                             <div class="col-12">
                                 <button type="submit" class="btn w-100 rounded-pill py-3 fw-bold text-white shadow" style="background-color: var(--sparrow-green);" id="contactSubmitBtn">
                                     <span id="contactSubmitText">Send Message</span>
@@ -110,6 +173,7 @@
 </section>
 
 {{-- jQuery Ajax Script --}}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function () {
@@ -118,6 +182,13 @@ $(document).ready(function () {
         $('.text-danger').hide().text('');
         $('.form-control').removeClass('is-invalid');
         $('#contactSuccessMessage').hide().text('');
+
+        // Client-side validation check for required checkbox
+        if (!$('#sms_consent').is(':checked')) {
+            $('#sms_consent_error').text('Please check this box if you want to proceed.').show();
+            return;
+        }
+
         $('#contactSubmitBtn').prop('disabled', true);
         $('#contactSubmitText').text('Sending...');
         $('#contactLoadingSpinner').show();
@@ -154,6 +225,11 @@ $(document).ready(function () {
         $(this).removeClass('is-invalid');
         let fieldName = $(this).attr('name');
         $('.' + fieldName + '_error').hide().text('');
+    });
+    $('#sms_consent').on('change', function() {
+        if ($(this).is(':checked')) {
+            $('#sms_consent_error').hide().text('');
+        }
     });
 });
 </script>

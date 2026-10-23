@@ -586,7 +586,7 @@
                 <p class="text-muted lead mb-0 fs-6">Hand-picked open roles curated directly by our administration.</p>
             </div>
             <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                <a href="#" class="btn btn-outline-dark rounded-pill px-4 py-2 fw-bold text-sm">View All Vacancies <i class="fas fa-arrow-right ms-2"></i></a>
+                <a href="{{ route('Home.jobs') }}" class="btn btn-outline-dark rounded-pill px-4 py-2 fw-bold text-sm">View All Vacancies <i class="fas fa-arrow-right ms-2"></i></a>
             </div>
         </div>
 
@@ -776,9 +776,7 @@
             <p class="company-sub text-muted mb-3">
                 {{ $job->company_name }}
 
-                <i class="fas fa-check-circle small ms-1"
-                   style="color: var(--sparrow-green);">
-                </i>
+
 
             </p>
 
@@ -918,9 +916,7 @@ Contact Admin
                 </h2>
                 <p class="text-muted lead mb-0 fs-6">Find curated administrative and professional opportunities across major industries.</p>
             </div>
-            <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
-                <a href="{{ asset('/') }}" class="btn btn-outline-dark rounded-pill px-4 py-2 fw-bold text-sm">View All Categories <i class="fas fa-arrow-right ms-2"></i></a>
-            </div>
+
         </div>
 
         <!-- Sectors Grid -->

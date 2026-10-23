@@ -2,72 +2,342 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
 use App\Models\Job;
 use App\Models\JobApplication;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
+
     public function index()
     {
+
         $user = Auth::user();
 
-        $isAdmin = $user && (int) $user->role_id === 1;
-        $isCompany = $user && (int) $user->role_id === 3;
 
-        $company = null;
-        $data = [];
+        $isAdmin = $user && (int)$user->role_id === 1;
 
-        if ($isCompany) {
-            $company = Company::where('user_id', $user->id)->first();
+
+        if(!$isAdmin)
+        {
+            abort(403,'Unauthorized');
         }
 
-        if ($isAdmin) {
-            $data = [
-                'totalCompanies' => Company::count(),
-                'totalJobs' => Job::count(),
-                'approvedJobs' => Job::where('approval_status', 'approved')->count(),
-                'pendingJobs' => Job::where('approval_status', 'pending')->count(),
-                'rejectedJobs' => Job::where('approval_status', 'rejected')->count(),
-                'totalApplications' => JobApplication::count(),
-                'recentJobs' => Job::latest()->take(5)->get(),
-                'recentApplications' => JobApplication::latest()->take(5)->get(),
-            ];
-        } elseif ($isCompany) {
-            if (!$company) {
-                return redirect()->back()->with('error', 'Company profile not found.');
-            }
 
-            $companyJobIds = Job::where('company_id', $company->id)->pluck('id');
 
-            $data = [
-                'company' => $company,
-                'myJobs' => Job::where('company_id', $company->id)->count(),
-                'myApprovedJobs' => Job::where('company_id', $company->id)
-                    ->where('approval_status', 'approved')
-                    ->count(),
-                'myPendingJobs' => Job::where('company_id', $company->id)
-                    ->where('approval_status', 'pending')
-                    ->count(),
-                'myRejectedJobs' => Job::where('company_id', $company->id)
-                    ->where('approval_status', 'rejected')
-                    ->count(),
-                'myApplications' => JobApplication::whereIn('job_id', $companyJobIds)->count(),
-                'recentMyJobs' => Job::where('company_id', $company->id)
-                    ->latest()
-                    ->take(5)
-                    ->get(),
-                'recentMyApplications' => JobApplication::whereIn('job_id', $companyJobIds)
-                    ->latest()
-                    ->take(5)
-                    ->get(),
-            ];
-        } else {
-            return abort(403, 'Unauthorized');
-        }
+        /*
+        |--------------------------------------------------------------------------
+        | JOB COUNTS
+        |--------------------------------------------------------------------------
+        */
 
-        return view('Dashboard.admin.dashboard', compact('user', 'isAdmin', 'isCompany') + $data);
+
+        $totalJobs = Job::count();
+
+
+        $activeJobs = Job::where(
+            'approval_status',
+            'approved'
+        )->count();
+
+
+
+        $pendingJobs = Job::where(
+            'approval_status',
+            'pending'
+        )->count();
+
+
+
+        // Blade ke liye
+        $pendingJobsCount = $pendingJobs;
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | APPLICATION COUNTS
+        |--------------------------------------------------------------------------
+        */
+
+
+        $totalApplications = JobApplication::count();
+
+
+
+        $pendingApplicationsCount = JobApplication::where(
+            'status',
+            0
+        )->count();
+
+
+
+        $shortlisted = JobApplication::where(
+            'status',
+            'shortlisted'
+        )->count();
+
+
+
+        $selected = JobApplication::where(
+            'status',
+            'selected'
+        )->count();
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | SUCCESS RATE
+        |--------------------------------------------------------------------------
+        */
+
+
+        $successRate = $totalApplications > 0
+            ?
+            round(($selected / $totalApplications) * 100)
+            :
+            0;
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | JOB VIEWS
+        |--------------------------------------------------------------------------
+        */
+
+
+        $totalViews = Job::sum('views');
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | DASHBOARD STATS
+        |--------------------------------------------------------------------------
+        */
+
+
+        $stats = [
+
+            'totalJobs' => $totalJobs,
+
+            'activeJobs' => $activeJobs,
+
+            'pendingJobs' => $pendingJobs,
+
+            'totalApplications' => $totalApplications,
+
+            'shortlisted' => $shortlisted,
+
+            'successRate' => $successRate,
+
+            'jobViews' => $totalViews,
+
+        ];
+
+
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | TOP JOBS
+        |--------------------------------------------------------------------------
+        */
+
+
+        $topJobs = Job::withCount('applications')
+            ->orderBy(
+                'applications_count',
+                'desc'
+            )
+            ->take(10)
+            ->get();
+
+
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | AI RECOMMENDATIONS
+        |--------------------------------------------------------------------------
+        */
+
+
+        $aiRecommendations = Job::withCount('applications')
+            ->orderBy(
+                'applications_count',
+                'desc'
+            )
+            ->take(4)
+            ->get();
+
+
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | ALERTS
+        |--------------------------------------------------------------------------
+        */
+
+
+        $alerts = [
+
+            [
+
+                'type'=>'warning',
+
+                'title'=>'Pending Jobs',
+
+                'message'=>$pendingJobsCount.
+                ' jobs waiting for approval.'
+
+            ],
+
+
+            [
+
+                'type'=>'danger',
+
+                'title'=>'Applications',
+
+                'message'=>$pendingApplicationsCount.
+                ' applications need review.'
+
+            ]
+
+        ];
+
+
+
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CHART DATA
+        |--------------------------------------------------------------------------
+        */
+
+
+        $chartData = JobApplication::select(
+
+                DB::raw(
+                    'DATE(created_at) as date'
+                ),
+
+                DB::raw(
+                    'count(*) as total'
+                )
+
+            )
+            ->where(
+                'created_at',
+                '>=',
+                Carbon::now()->subDays(7)
+            )
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+
+
+
+        $chartLabels = $chartData->pluck('date');
+
+
+        $chartValues = $chartData->pluck('total');
+
+
+
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | TIMELINE
+        |--------------------------------------------------------------------------
+        */
+
+
+        $latestApplications = JobApplication::with('job')
+            ->latest()
+            ->take(5)
+            ->get();
+
+
+
+        $latestJobs = Job::latest()
+            ->take(5)
+            ->get();
+
+
+
+
+
+
+
+        return view(
+            'Dashboard.admin.dashboard',
+            compact(
+
+                'user',
+
+                'isAdmin',
+
+                'stats',
+
+                'totalJobs',
+
+                'activeJobs',
+
+                'pendingJobs',
+
+                'pendingJobsCount',
+
+                'totalApplications',
+
+                'pendingApplicationsCount',
+
+                'shortlisted',
+
+                'selected',
+
+                'successRate',
+
+                'topJobs',
+
+                'aiRecommendations',
+
+                'alerts',
+
+                'chartLabels',
+
+                'chartValues',
+
+                'latestApplications',
+
+                'latestJobs'
+
+            )
+        );
+
+
     }
+
 }

@@ -3,23 +3,44 @@
 
 <style>
     .job-detail-header {
-    background: linear-gradient(135deg, #1f2933, #34495e) !important;
-    color: white !important;
-}
+        background: linear-gradient(135deg, #1f2933, #34495e) !important;
+        color: white !important;
+    }
 
-.job-detail-header h1 {
-    color: white !important;
-}
+    .job-detail-header h1 {
+        color: white !important;
+    }
 
-.job-detail-header p {
-    color: rgba(255,255,255,0.7) !important;
-}
+    .job-detail-header p {
+        color: rgba(255,255,255,0.7) !important;
+    }
 
-.job-detail-header .breadcrumb-item,
-.job-detail-header .breadcrumb-item.active {
-    color: white !important;
-}
+    .job-detail-header .breadcrumb-item,
+    .job-detail-header .breadcrumb-item.active {
+        color: white !important;
+    }
+
+    /* Professional Mobile Header Optimization (Icon Removed) */
+    @media (max-width: 991px) {
+        .job-detail-header {
+            text-align: center;
+                 padding-top: 105px !important;
+            padding-bottom: 40px !important;
+        }
+        .job-detail-header .d-flex-mobile {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+        }
+        .job-detail-header h1 {
+            font-size: 1.75rem !important;
+        }
+        .job-detail-apply-btn {
+            width: 100% !important;
+        }
+    }
 </style>
+
 @php
     use Illuminate\Support\Str;
 
@@ -42,7 +63,7 @@
 <section class="job-detail-header bg-dark-blue text-white py-5">
     <div class="container pt-3 pb-4">
         <nav aria-label="breadcrumb" class="mb-3">
-            <ol class="breadcrumb mb-0">
+            <ol class="breadcrumb mb-0 justify-content-center justify-content-lg-start">
                 <li class="breadcrumb-item">
                     <a href="{{ route('Home.jobs') }}" class="text-white-50 text-decoration-none small">Vacancies</a>
                 </li>
@@ -52,12 +73,10 @@
 
         <div class="row align-items-center pt-2">
             <div class="col-lg-8">
-                <div class="d-flex align-items-center gap-4">
-                    <div class="company-logo-large bg-white rounded-4 p-3 shadow-sm flex-shrink-0">
-                        <i class="fas fa-building text-primary display-6"></i>
-                    </div>
+                <!-- Icon completely removed, clean typography layout -->
+                <div class="d-flex d-flex-mobile align-items-start gap-3">
                     <div>
-                        <h1 class="fw-bold display-6 mb-1">{{ $job->position }}</h1>
+                        <h1 class="fw-bold display-6 mb-2">{{ $job->position }}</h1>
                         <p class="lead text-white-50 mb-0">{{ $job->company_name }} &bull; {{ $location }}</p>
                     </div>
                 </div>
@@ -65,7 +84,7 @@
 
             <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
                 @if($job->allow_application == 1)
-                    <button class="btn btn-custom px-5 py-3 rounded-pill fw-bold shadow-lg job-detail-apply-btn" type="button">
+                    <button class="btn btn-custom px-5 py-3 rounded-pill fw-bold shadow-lg job-detail-apply-btn" type="button" style="background-color: var(--sparrow-green); color: white;">
                         Apply For This Position <i class="fas fa-arrow-right ms-2"></i>
                     </button>
                 @endif
@@ -101,7 +120,7 @@
                         <h5 class="fw-bold text-dark-blue mb-4">Job Overview</h5>
 
                         <div class="overview-item d-flex gap-3 mb-4">
-                            <div class="icon-box bg-pink-light text-pink rounded-3 p-2">
+                            <div class="icon-box rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: rgba(99, 141, 63, 0.12); color: var(--sparrow-green);">
                                 <i class="fas fa-calendar-alt"></i>
                             </div>
                             <div>
@@ -111,7 +130,7 @@
                         </div>
 
                         <div class="overview-item d-flex gap-3 mb-4">
-                            <div class="icon-box bg-pink-light text-pink rounded-3 p-2">
+                            <div class="icon-box rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: rgba(99, 141, 63, 0.12); color: var(--sparrow-green);">
                                 <i class="fas fa-money-bill-wave"></i>
                             </div>
                             <div>
@@ -121,7 +140,7 @@
                         </div>
 
                         <div class="overview-item d-flex gap-3 mb-4">
-                            <div class="icon-box bg-pink-light text-pink rounded-3 p-2">
+                            <div class="icon-box rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: rgba(99, 141, 63, 0.12); color: var(--sparrow-green);">
                                 <i class="fas fa-user-clock"></i>
                             </div>
                             <div>
@@ -132,16 +151,16 @@
 
                         <hr class="my-4 opacity-25">
 
-<button class="btn btn-outline-dark w-100 rounded-pill fw-bold mb-3 btn-save-job-detail" type="button" data-job-id="{{ $job->id }}">
-    <i class="far fa-heart me-2"></i>
-    <span class="save-job-detail-text">Save This Job</span>
-</button>
+                        <button class="btn btn-outline-dark w-100 rounded-pill fw-bold mb-3 btn-save-job-detail" type="button" data-job-id="{{ $job->id }}">
+                            <i class="far fa-heart me-2"></i>
+                            <span class="save-job-detail-text">Save This Job</span>
+                        </button>
 
-@if($job->allow_application == 1)
-<button class="btn btn-custom w-100 rounded-pill fw-bold py-3 shadow job-detail-apply-btn" type="button">
-    Apply Now
-</button>
-@endif
+                        @if($job->allow_application == 1)
+                        <button class="btn w-100 rounded-pill fw-bold py-3 shadow job-detail-apply-btn text-white" type="button" style="background-color: var(--sparrow-green);">
+                            Apply Now
+                        </button>
+                        @endif
                     </div>
 
                     <div class="card border-0 rounded-4 shadow-sm p-4 text-center">
@@ -182,7 +201,7 @@
 
             <div class="row g-0">
                 <div class="col-lg-5 bg-light p-4 p-md-5 border-end">
-                    <span class="badge bg-pink-light text-pink px-3 py-1 rounded-pill fw-bold mb-3">Job Details</span>
+                    <span class="badge px-3 py-1 rounded-pill fw-bold mb-3" style="background-color: rgba(99, 141, 63, 0.12); color: var(--sparrow-green);">Job Details</span>
                     <h2 id="modalJobTitle" class="fw-bold text-dark-blue mb-2">{{ $job->position }}</h2>
                     <h5 id="modalCompanyName" class="text-muted mb-4">{{ $job->company_name }}</h5>
                     <div class="d-flex gap-3 mb-4">
@@ -209,63 +228,40 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label fw-bold small text-muted">Full Name *</label>
-                                <input type="text"
-                                       name="full_name"
-                                       class="form-control"
-                                       placeholder="Enter full name"
-                                       value="">
+                                <input type="text" name="full_name" class="form-control" placeholder="Enter full name" value="">
                                 <div class="text-danger small mt-1 full_name_error" style="display: none;"></div>
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label fw-bold small text-muted">Email Address *</label>
-                                <input type="email"
-                                       name="email"
-                                       class="form-control"
-                                       placeholder="email@example.com"
-                                       value="">
+                                <input type="email" name="email" class="form-control" placeholder="email@example.com" value="">
                                 <div class="text-danger small mt-1 email_error" style="display: none;"></div>
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label fw-bold small text-muted">Phone Number *</label>
-                                <input type="tel"
-                                       name="phone"
-                                       class="form-control"
-                                       placeholder="+92 --- -------"
-                                       value="">
+                                <input type="tel" name="phone" class="form-control" placeholder="+92 --- -------" value="">
                                 <div class="text-danger small mt-1 phone_error" style="display: none;"></div>
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label fw-bold small text-muted">City *</label>
-                                <input type="text"
-                                       name="city"
-                                       class="form-control"
-                                       placeholder="Enter your city"
-                                       value="">
+                                <input type="text" name="city" class="form-control" placeholder="Enter your city" value="">
                                 <div class="text-danger small mt-1 city_error" style="display: none;"></div>
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label fw-bold small text-muted">Message (Optional)</label>
-                                <textarea name="message"
-                                          class="form-control"
-                                          rows="3"
-                                          placeholder="Any additional information..."></textarea>
+                                <textarea name="message" class="form-control" rows="3" placeholder="Any additional information..."></textarea>
                                 <div class="text-danger small mt-1 message_error" style="display: none;"></div>
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label fw-bold small text-muted">Upload CV (PDF Preferred) *</label>
                                 <div class="upload-area text-center p-4 border-dashed rounded-4 bg-light">
-                                    <input type="file"
-                                           name="cv"
-                                           id="cvFile"
-                                           class="d-none"
-                                           accept=".pdf,.doc,.docx">
+                                    <input type="file" name="cv" id="cvFile" class="d-none" accept=".pdf,.doc,.docx">
                                     <label for="cvFile" class="w-100 cursor-pointer">
-                                        <i class="fas fa-cloud-upload-alt text-pink fs-1 mb-2"></i>
+                                        <i class="fas fa-cloud-upload-alt fs-1 mb-2" style="color: var(--sparrow-green);"></i>
                                         <p class="mb-0 fw-bold small" id="fileNameDisplay">Click to Select Resume</p>
                                         <small class="text-muted d-block">Max file size: 2MB</small>
                                     </label>
@@ -274,7 +270,7 @@
                             </div>
 
                             <div class="col-12 mt-4">
-                                <button type="submit" class="btn btn-custom w-100 rounded-pill py-3 fw-bold" id="submitBtn">
+                                <button type="submit" class="btn w-100 rounded-pill py-3 fw-bold text-white" id="submitBtn" style="background-color: var(--sparrow-green);">
                                     <span id="submitText">Submit My Application</span>
                                     <span id="loadingSpinner" style="display: none;" class="spinner-border spinner-border-sm"></span>
                                     <i class="fas fa-paper-plane ms-2"></i>
@@ -295,8 +291,8 @@
             <div class="modal-body p-0">
                 <div class="text-center p-5">
                     <div class="mx-auto mb-4 d-flex align-items-center justify-content-center rounded-circle shadow-sm"
-                         style="width: 85px; height: 85px; background: rgba(255, 105, 180, 0.12);">
-                        <i class="fas fa-heart text-pink" style="font-size: 32px;"></i>
+                         style="width: 85px; height: 85px; background: rgba(99, 141, 63, 0.12);">
+                        <i class="fas fa-heart" style="font-size: 32px; color: var(--sparrow-green);"></i>
                     </div>
 
                     <h3 class="fw-bold text-dark-blue mb-2">Login Required</h3>
@@ -305,7 +301,7 @@
                     </p>
 
                     <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
-                        <a href="{{ route('auth.accountlogin') }}" class="btn btn-custom rounded-pill px-4 py-2 fw-bold">
+                        <a href="{{ route('auth.accountlogin') }}" class="btn rounded-pill px-4 py-2 fw-bold text-white" style="background-color: var(--sparrow-green);">
                             Login Now
                         </a>
                         <a href="{{ route('auth.register') }}" class="btn btn-outline-dark rounded-pill px-4 py-2 fw-bold">
@@ -328,8 +324,8 @@
         <div class="modal-content border-0 rounded-4 shadow-lg text-center p-5">
             <i class="fas fa-check-circle text-success display-1 mb-4"></i>
             <h3 class="fw-bold text-dark-blue">Application Sent!</h3>
-            <p class="text-muted">Your application for <strong id="successJobName" class="text-pink">{{ $job->position }}</strong> was successful.</p>
-            <button class="btn btn-custom px-5 rounded-pill" data-bs-dismiss="modal">Close</button>
+            <p class="text-muted">Your application for <strong id="successJobName" style="color: var(--sparrow-green);">{{ $job->position }}</strong> was successful.</p>
+            <button class="btn px-5 rounded-pill text-white" data-bs-dismiss="modal" style="background-color: var(--sparrow-green);">Close</button>
         </div>
     </div>
 </div>

@@ -35,27 +35,63 @@
     }
 
     .form-check-input:checked {
-        background-color: #638D3F !important; /* Aapka theme color (pink) */
+        background-color: #638D3F !important;
         border-color: #638D3F !important;
     }
 
     .form-check-input:focus {
         border-color: #638D3F !important;
     }
+
+    /* Perfect Mobile Search Visibility Fix */
+    @media (max-width: 991px) {
+        .search-bar-wrapper {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+        }
+        .search-bar-wrapper input {
+            background: #ffffff !important;
+            color: #1f2933 !important; /* Text color visible karne ke liye */
+            -webkit-text-fill-color: #1f2933 !important;
+            border-radius: 12px !important;
+            padding: 12px 16px !important;
+            height: 50px;
+            border: 1px solid #ced4da !important;
+            font-size: 1rem;
+        }
+        .search-bar-wrapper input::placeholder {
+            color: #94a3b8 !important;
+            opacity: 1;
+        }
+        .search-bar-wrapper button {
+            width: 100% !important;
+            border-radius: 12px !important;
+            height: 50px;
+            margin-top: 0 !important;
+        }
+    }
 </style>
 
 <header class="page-header bg-dark-blue text-white py-5 position-relative overflow-hidden">
     <div class="header-pattern"></div>
     <div class="container position-relative z-2 py-4">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <h1 class="fw-bold display-5">Explore <span class="text-pink">Opportunities</span></h1>
+        <div class="row align-items-center g-4">
+            <div class="col-lg-8 text-center text-lg-start">
+                <span class="badge px-3 py-2 rounded-pill fw-bold mb-2" style="background-color: rgba(99, 141, 63, 0.15); color: var(--sparrow-green); font-size: 0.8rem; letter-spacing: 0.5px;">
+                    <i class="fas fa-briefcase me-2"></i>CAREER PORTAL
+                </span>
+                <h1 class="fw-bold display-5 mb-2">Explore <span style="color: var(--sparrow-green);">Opportunities</span></h1>
                 <p class="text-white-50 mb-0">Discover your next career move with professional insights.</p>
             </div>
-            <div class="col-md-4 mt-3 mt-md-0">
-                <div class="input-group bg-white rounded-pill p-1 shadow-sm border">
-                    <input type="text" id="jobSearchInput" class="form-control border-0 rounded-pill ps-3" placeholder="Search by title...">
-                    <button class="btn btn-custom rounded-pill px-4 fw-bold" id="searchBtn">Search</button>
+            <div class="col-lg-4">
+                <div class="input-group search-bar-wrapper bg-white rounded-pill p-1 shadow-sm border">
+                    <input type="text" id="jobSearchInput" class="form-control border-0 rounded-pill ps-3" placeholder="Search by title, role...">
+                    <button class="btn btn-custom rounded-pill px-4 fw-bold" id="searchBtn" style="background-color: var(--sparrow-green); color: white;">Search</button>
                 </div>
             </div>
         </div>
@@ -69,7 +105,7 @@
                 <div class="filters-sidebar bg-white p-4 rounded-4 shadow-sm border border-light sticky-top" style="top: 100px; z-index: 90;">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h5 class="fw-bold mb-0 text-dark-blue">Filters</h5>
-                        <a href="javascript:void(0);" id="clearAllBtn" class="text-pink small fw-bold text-decoration-none">Clear All</a>
+                        <a href="javascript:void(0);" id="clearAllBtn" class="small fw-bold text-decoration-none" style="color: var(--sparrow-green);">Clear All</a>
                     </div>
 
                     <div class="filter-group mb-4">
@@ -109,9 +145,10 @@
                     <hr class="my-4 opacity-25">
 
                     <div class="filter-group">
-<label class="fw-bold mb-2 small text-uppercase text-muted ls-1">
-Expected Salary: $ <span id="salaryValue">0</span>k+
-</label>                        <input type="range" class="form-range" min="0" max="500" value="0" id="salaryRange">
+                        <label class="fw-bold mb-2 small text-uppercase text-muted ls-1">
+                            Expected Salary: $ <span id="salaryValue">0</span>k+
+                        </label>
+                        <input type="range" class="form-range" min="0" max="500" value="0" id="salaryRange">
                         <div class="d-flex justify-content-between x-small fw-bold text-muted mt-1">
                             <span>$ 0</span><span>$ 500k+</span>
                         </div>
@@ -120,28 +157,25 @@ Expected Salary: $ <span id="salaryValue">0</span>k+
             </div>
 
             <div class="col-lg-9">
-                <div id="jobsCount" class="mb-3 text-muted"></div>
+                <div id="jobsCount" class="mb-3 text-muted fw-semibold"></div>
                 <div class="row g-4" id="jobContainer">
                     @php use Illuminate\Support\Str; @endphp
                     @forelse($jobs as $job)
                         @php
                             $salaryFrom = $job->salary_from ? (int)$job->salary_from : 0;
                             $salaryTo = $job->salary_to ? (int)$job->salary_to : 0;
-$salaryText = $salaryFrom
-    ? "$" . number_format($salaryFrom) . ($salaryTo ? " - $" . number_format($salaryTo) : "")
-    : "Salary negotiable";
+                            $salaryText = $salaryFrom
+                                ? "$" . number_format($salaryFrom) . ($salaryTo ? " - $" . number_format($salaryTo) : "")
+                                : "Salary negotiable";
                             $location = trim(($job->city ?? "") . ($job->country ? ", {$job->country}" : ""));
 
-                            // Calculate max salary for filtering
                             $maxSalary = max($salaryFrom, $salaryTo);
 
-                            // Expertise logic for data-attribute
                             $exp = Str::lower($job->experience ?? '');
                             $level = "mid";
                             if(Str::contains($exp, ['entry', 'fresh', '0 years', '0', 'intern'])) $level = "entry";
                             if(Str::contains($exp, ['senior', 'lead', 'manager', '5', '5+', '6', '7', '8', '9', '10'])) $level = "senior";
 
-                            // Job type slug for filter
                             $jobTypeRaw = strtolower($job->job_type ?? 'full-time');
                             $jobTypeSlug = $jobTypeRaw;
                             if(str_contains($jobTypeRaw, 'part')) $jobTypeSlug = 'part-time';
@@ -156,16 +190,14 @@ $salaryText = $salaryFrom
                              data-title="{{ strtolower($job->position) }}"
                              data-location="{{ strtolower($location) }}">
 
-                         <div class="job-grid-card bg-white p-4 rounded-4 border-0 shadow-sm position-relative d-flex flex-column h-100"
-data-location="{{ $location ?: 'Location not specified' }}"
-data-desc="{{ strip_tags($job->description) }}"
-data-salary-text="{{ $salaryText }}"
-data-title="{{ $job->position }}"
-data-id="{{ $job->id }}"
-data-slug="{{ $job->slug }}"
->
+                           <div class="job-grid-card bg-white p-4 rounded-4 border-0 shadow-sm position-relative d-flex flex-column h-100"
+                                data-location="{{ $location ?: 'Location not specified' }}"
+                                data-desc="{{ strip_tags($job->description) }}"
+                                data-salary-text="{{ $salaryText }}"
+                                data-title="{{ $job->position }}"
+                                data-id="{{ $job->id }}"
+                                data-slug="{{ $job->slug }}">
 
-                                <!-- Top Header: Time Badge & Save Heart -->
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <span class="badge bg-light text-muted border rounded-pill px-3 py-1 small fw-normal">
                                         <i class="far fa-clock me-1"></i> {{ $job->created_at ? $job->created_at->diffForHumans() : 'Recently' }}
@@ -175,10 +207,8 @@ data-slug="{{ $job->slug }}"
                                     </button>
                                 </div>
 
-                                <!-- Job Position Title -->
                                 <h5 class="fw-bold text-dark mb-2">{{ $job->position }}</h5>
 
-                                <!-- Location & Experience Row -->
                                 <div class="d-flex align-items-center gap-3 text-muted small mb-3">
                                     @if($location)
                                         <span><i class="fas fa-map-marker-alt me-1 text-danger"></i> {{ $location }}</span>
@@ -186,12 +216,10 @@ data-slug="{{ $job->slug }}"
                                     <span><i class="fas fa-briefcase me-1 text-secondary"></i> {{ ucfirst($level) }} Level</span>
                                 </div>
 
-                                <!-- Short 2-Line Description Snippet -->
                                 <p class="text-muted small mb-4 flex-grow-1" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.5;">
                                     {{ strip_tags($job->description) }}
                                 </p>
 
-                                <!-- Pills / Badges: Type & Salary -->
                                 <div class="d-flex flex-wrap gap-2 mb-4">
                                     <span class="badge bg-light text-dark border rounded-pill px-3 py-2 fw-medium">
                                         {{ $job->job_type ?? 'Full Time' }}
@@ -201,39 +229,18 @@ data-slug="{{ $job->slug }}"
                                     </span>
                                 </div>
 
-                                <!-- View Details Button -->
-                                {{-- <div class="mt-auto">
+                                <div class="d-flex gap-2 mt-auto action-buttons-wrapper">
                                     <a href="{{ route('Home.jobs-details', ['job' => $job->slug]) }}"
-                                       class="btn btn-custom rounded-pill w-100 py-2 fw-bold text-decoration-none text-center d-flex align-items-center justify-content-center">
-                                        View Details
-                                        <i class="fas fa-arrow-right ms-2"></i>
+                                       class="btn btn-outline-dark rounded-pill flex-grow-1 py-2 small fw-bold text-decoration-none text-center d-flex align-items-center justify-content-center">
+                                        Read More
                                     </a>
-                                </div> --}}
-<div class="d-flex gap-2 mt-auto action-buttons-wrapper">
 
-    <a href="{{ route('Home.jobs-details', ['job' => $job->slug]) }}"
-       class="btn btn-outline-dark rounded-pill flex-grow-1 py-2 small fw-bold text-decoration-none text-center d-flex align-items-center justify-content-center">
-
-        Read More
-
-    </a>
-
-
-@if($job->allow_application)
-
-<button class="btn btn-custom rounded-pill flex-grow-1 btn-apply-trigger py-2 small fw-bold d-flex align-items-center justify-content-center"
-type="button">
-
-Apply Now
-
-</button>
-
-@endif
-
-</div>
-
-
-
+                                    @if($job->allow_application)
+                                    <button class="btn btn-custom rounded-pill flex-grow-1 btn-apply-trigger py-2 small fw-bold d-flex align-items-center justify-content-center" type="button" style="background-color: var(--sparrow-green); color: white;">
+                                        Apply Now
+                                    </button>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     @empty
@@ -253,8 +260,6 @@ Apply Now
     </div>
 </section>
 
-<!-- Login Required Modal -->
-
 <!-- Apply Modal -->
 <div class="modal fade" id="applyModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -265,7 +270,7 @@ Apply Now
 
             <div class="row g-0">
                 <div class="col-lg-5 bg-light p-4 p-md-5 border-end">
-                    <span class="badge bg-pink-light text-pink px-3 py-1 rounded-pill fw-bold mb-3">Job Details</span>
+                    <span class="badge px-3 py-1 rounded-pill fw-bold mb-3" style="background-color: rgba(99, 141, 63, 0.15); color: var(--sparrow-green);">Job Details</span>
                     <h2 id="modalJobTitle" class="fw-bold text-dark-blue mb-2">---</h2>
                     <h5 id="modalCompanyName" class="text-muted mb-4">---</h5>
                     <div class="d-flex gap-3 mb-4">
@@ -292,63 +297,40 @@ Apply Now
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label fw-bold small text-muted">Full Name *</label>
-                                <input type="text"
-                                       name="full_name"
-                                       class="form-control"
-                                       placeholder="Enter full name"
-                                       value="">
+                                <input type="text" name="full_name" class="form-control" placeholder="Enter full name" value="">
                                 <div class="text-danger small mt-1 full_name_error" style="display: none;"></div>
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label fw-bold small text-muted">Email Address *</label>
-                                <input type="email"
-                                       name="email"
-                                       class="form-control"
-                                       placeholder="email@example.com"
-                                       value="">
+                                <input type="email" name="email" class="form-control" placeholder="email@example.com" value="">
                                 <div class="text-danger small mt-1 email_error" style="display: none;"></div>
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label fw-bold small text-muted">Phone Number *</label>
-                                <input type="tel"
-                                       name="phone"
-                                       class="form-control"
-                                       placeholder="+92 --- -------"
-                                       value="">
+                                <input type="tel" name="phone" class="form-control" placeholder="+92 --- -------" value="">
                                 <div class="text-danger small mt-1 phone_error" style="display: none;"></div>
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label fw-bold small text-muted">City *</label>
-                                <input type="text"
-                                       name="city"
-                                       class="form-control"
-                                       placeholder="Enter your city"
-                                       value="">
+                                <input type="text" name="city" class="form-control" placeholder="Enter your city" value="">
                                 <div class="text-danger small mt-1 city_error" style="display: none;"></div>
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label fw-bold small text-muted">Message (Optional)</label>
-                                <textarea name="message"
-                                          class="form-control"
-                                          rows="3"
-                                          placeholder="Any additional information..."></textarea>
+                                <textarea name="message" class="form-control" rows="3" placeholder="Any additional information..."></textarea>
                                 <div class="text-danger small mt-1 message_error" style="display: none;"></div>
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label fw-bold small text-muted">Upload CV (PDF Preferred) *</label>
                                 <div class="upload-area text-center p-4 border-dashed rounded-4 bg-light">
-                                    <input type="file"
-                                           name="cv"
-                                           id="cvFile"
-                                           class="d-none"
-                                           accept=".pdf,.doc,.docx">
+                                    <input type="file" name="cv" id="cvFile" class="d-none" accept=".pdf,.doc,.docx">
                                     <label for="cvFile" class="w-100 cursor-pointer">
-                                        <i class="fas fa-cloud-upload-alt text-pink fs-1 mb-2"></i>
+                                        <i class="fas fa-cloud-upload-alt fs-1 mb-2" style="color: var(--sparrow-green);"></i>
                                         <p class="mb-0 fw-bold small" id="fileNameDisplay">Click to Select Resume</p>
                                         <small class="text-muted d-block">Max file size: 2MB</small>
                                     </label>
@@ -357,7 +339,7 @@ Apply Now
                             </div>
 
                             <div class="col-12 mt-4">
-                                <button type="submit" class="btn btn-custom w-100 rounded-pill py-3 fw-bold" id="submitBtn">
+                                <button type="submit" class="btn w-100 rounded-pill py-3 fw-bold text-white" id="submitBtn" style="background-color: var(--sparrow-green);">
                                     <span id="submitText">Submit My Application</span>
                                     <span id="loadingSpinner" style="display: none;" class="spinner-border spinner-border-sm"></span>
                                     <i class="fas fa-paper-plane ms-2"></i>
@@ -378,8 +360,8 @@ Apply Now
             <div class="modal-body p-0">
                 <div class="text-center p-5">
                     <div class="mx-auto mb-4 d-flex align-items-center justify-content-center rounded-circle shadow-sm"
-                         style="width: 85px; height: 85px; background: rgba(255, 105, 180, 0.12);">
-                        <i class="fas fa-heart text-pink" style="font-size: 32px;"></i>
+                         style="width: 85px; height: 85px; background: rgba(99, 141, 63, 0.12);">
+                        <i class="fas fa-heart" style="font-size: 32px; color: var(--sparrow-green);"></i>
                     </div>
 
                     <h3 class="fw-bold text-dark-blue mb-2">Login Required</h3>
@@ -388,7 +370,7 @@ Apply Now
                     </p>
 
                     <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
-                        <a href="{{ route('auth.accountlogin') }}" class="btn btn-custom rounded-pill px-4 py-2 fw-bold">
+                        <a href="{{ route('auth.accountlogin') }}" class="btn rounded-pill px-4 py-2 fw-bold text-white" style="background-color: var(--sparrow-green);">
                             Login Now
                         </a>
                         <a href="{{ route('auth.register') }}" class="btn btn-outline-dark rounded-pill px-4 py-2 fw-bold">
@@ -411,8 +393,8 @@ Apply Now
         <div class="modal-content border-0 rounded-4 shadow-lg text-center p-5">
             <i class="fas fa-check-circle text-success display-1 mb-4"></i>
             <h3 class="fw-bold text-dark-blue">Application Sent!</h3>
-            <p class="text-muted">Your application for <strong id="successJobName" class="text-pink"></strong> was successful.</p>
-            <button class="btn btn-custom px-5 rounded-pill" data-bs-dismiss="modal">Close</button>
+            <p class="text-muted">Your application for <strong id="successJobName" style="color: var(--sparrow-green);"></strong> was successful.</p>
+            <button class="btn px-5 rounded-pill text-white" data-bs-dismiss="modal" style="background-color: var(--sparrow-green);">Close</button>
         </div>
     </div>
 </div>
@@ -429,7 +411,6 @@ $(document).ready(function() {
         currentJobSlug = card.data('slug');
         currentJobTitle = card.data('title');
 
-        // $('#jobIdField').val(currentJobSlug);
         $('#jobIdField').val(card.data('id'));
         $('#modalJobTitle').text(card.data('title'));
         $('#modalLocation').text(card.data('location'));
@@ -458,17 +439,14 @@ $(document).ready(function() {
     $('#applicationForm').on('submit', function(e) {
         e.preventDefault();
 
-        // Reset errors
         $('.text-danger').hide();
         $('.form-control').removeClass('is-invalid');
         $('.upload-area').removeClass('is-invalid');
 
-        // Show loading spinner
         $('#submitBtn').prop('disabled', true);
         $('#submitText').hide();
         $('#loadingSpinner').show();
 
-        // Client-side validation
         let hasError = false;
 
         const requiredFields = ['full_name', 'email', 'phone', 'city'];
@@ -501,11 +479,9 @@ $(document).ready(function() {
             return false;
         }
 
-        // Prepare FormData
         let formData = new FormData(this);
         formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
-        // AJAX request
         $.ajax({
             url: '/jobs/' + currentJobSlug,
             type: 'POST',
@@ -532,9 +508,9 @@ $(document).ready(function() {
                         }
                     });
                 } else {
-    console.log(xhr.responseText);
-    alert(xhr.responseText);
-}
+                    console.log(xhr.responseText);
+                    alert(xhr.responseText);
+                }
             },
             complete: function() {
                 $('#submitBtn').prop('disabled', false);
@@ -544,13 +520,11 @@ $(document).ready(function() {
         });
     });
 
-    // Email validation helper
     function isValidEmail(email) {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     }
 
-    // Remove error on input
     $('.form-control').on('input', function() {
         $(this).removeClass('is-invalid');
         const fieldName = $(this).attr('name');
@@ -558,29 +532,22 @@ $(document).ready(function() {
     });
 
     // ============== FILTER AND SEARCH FUNCTIONALITY ==============
-
     function filterJobs() {
-        // Get search term
         let searchTerm = $('#jobSearchInput').val().toLowerCase().trim();
 
-        // Get selected types
         let selectedTypes = [];
         $('input[data-filter="type"]:checked').each(function() {
             selectedTypes.push($(this).val());
         });
 
-        // Get selected levels
         let selectedLevels = [];
         $('input[data-filter="level"]:checked').each(function() {
             selectedLevels.push($(this).val());
         });
 
-        // Get salary filter value (in PKR thousands)
         let salaryFilter = parseInt($('#salaryRange').val()) || 0;
-
         let visibleCount = 0;
 
-        // Loop through each job card
         $('.job-card-item').each(function() {
             let $job = $(this);
             let jobType = $job.data('type');
@@ -590,30 +557,23 @@ $(document).ready(function() {
             let jobCompany = $job.data('company') || '';
             let jobLocation = $job.data('location') || '';
 
-            // Check search match
             let searchMatch = true;
             if (searchTerm) {
                 searchMatch = jobTitle.includes(searchTerm) ||
-                             jobCompany.includes(searchTerm) ||
-                             jobLocation.includes(searchTerm);
+                           jobCompany.includes(searchTerm) ||
+                           jobLocation.includes(searchTerm);
             }
 
-            // Check type match
             let typeMatch = selectedTypes.length === 0 || selectedTypes.includes(jobType);
-
-            // Check level match
             let levelMatch = selectedLevels.length === 0 || selectedLevels.includes(jobLevel);
 
-            // Check salary match (show jobs with salary >= filter value, or if salary is 0/negotiable)
             let salaryMatch = true;
             if (salaryFilter > 0) {
-                // Only filter if job has a salary value and it's less than filter
                 if (jobSalary > 0 && jobSalary < salaryFilter) {
                     salaryMatch = false;
                 }
             }
 
-            // Show/hide based on all filters
             if (searchMatch && typeMatch && levelMatch && salaryMatch) {
                 $job.show();
                 visibleCount++;
@@ -622,7 +582,6 @@ $(document).ready(function() {
             }
         });
 
-        // Update count display
         if (visibleCount === 0) {
             if ($('#noJobsMessage').length === 0) {
                 $('#jobContainer').append('<div id="noJobsMessage" class="col-12 text-center p-5"><h5>No jobs match your filters.</h5><p class="text-muted">Try adjusting your search criteria.</p></div>');
@@ -631,21 +590,17 @@ $(document).ready(function() {
             $('#noJobsMessage').remove();
         }
 
-        // Update jobs count text
         $('#jobsCount').text(visibleCount + ' job' + (visibleCount !== 1 ? 's' : '') + ' found');
     }
 
-    // Trigger filter on checkbox change
     $('.filter-checkbox').on('change', filterJobs);
 
-    // Salary range filter
     $('#salaryRange').on('input', function() {
         let value = $(this).val();
         $('#salaryValue').text(value);
         filterJobs();
     });
 
-    // Clear all filters
     $('#clearAllBtn').on('click', function() {
         $('#jobSearchInput').val('');
         $('.filter-checkbox').prop('checked', false);
@@ -654,7 +609,6 @@ $(document).ready(function() {
         filterJobs();
     });
 
-    // Search functionality
     $('#searchBtn').on('click', function() {
         filterJobs();
     });
@@ -665,7 +619,6 @@ $(document).ready(function() {
         }
     });
 
-    // Initial filter to show all jobs and count
     filterJobs();
 
     // ============== SAVE JOB FUNCTIONALITY ==============
@@ -703,18 +656,3 @@ $(document).ready(function() {
 });
 </script>
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

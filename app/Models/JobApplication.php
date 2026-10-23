@@ -8,14 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class JobApplication extends Model
 {
     use HasFactory;
-            protected $table ='job_applications';
 
-//     protected $fillable = [
-//     'job_id','full_name','email','phone','city','cv','message','status'
-// ];
-protected $fillable = [
+    protected $table = 'job_applications';
+
+    protected $fillable = [
         'job_id',
-        'full_name', // <-- Yeh add hona lazmi hai
+        'user_id',
+        'full_name',
         'email',
         'phone',
         'city',
@@ -23,9 +22,14 @@ protected $fillable = [
         'message',
         'status'
     ];
-public function job()
-{
-    return $this->belongsTo(Job::class);
-}
 
+    public function job()
+    {
+        return $this->belongsTo(Job::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

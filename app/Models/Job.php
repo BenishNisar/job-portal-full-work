@@ -10,31 +10,29 @@ class Job extends Model
 {
     use HasFactory;
 
-   protected $fillable = [
-
-    'position',
-    'slug',
-    'job_category',
-    'job_type',
-    'vacancy',
-    'experience',
-    'posted_date',
-    'last_date_to_apply',
-    'close_date',
-    'gender',
-    'salary_from',
-    'salary_to',
-    'city',
-    'state',
-    'country',
-    'education_level',
-    'description',
-    'long_description',
-    'status',
-    'approval_status',
- 'allow_application',
-
-];
+    protected $fillable = [
+        'position',
+        'slug',
+        'job_category',
+        'job_type',
+        'vacancy',
+        'experience',
+        'posted_date',
+        'last_date_to_apply',
+        'close_date',
+        'gender',
+        'salary_from',
+        'salary_to',
+        'city',
+        'state',
+        'country',
+        'education_level',
+        'description',
+        'long_description',
+        'status',
+        'approval_status',
+        'allow_application',
+    ];
 
     protected $casts = [
         'posted_date' => 'date',
@@ -46,7 +44,8 @@ class Job extends Model
     {
         static::creating(function ($job) {
             if (empty($job->slug)) {
-                $base = Str::slug(($job->position ?? 'job') . ' ' . ($job->company_name ?? ''));
+                // Fixed: Removed company_name reference since company system does not exist
+                $base = Str::slug($job->position ?? 'job');
                 $slug = $base ?: Str::slug('job');
 
                 $count = 1;
@@ -60,8 +59,8 @@ class Job extends Model
         });
     }
 
-    public function company()
+    public function applications()
     {
-        return $this->belongsTo(Company::class, 'company_id');
+        return $this->hasMany(JobApplication::class);
     }
 }
